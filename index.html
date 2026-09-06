@@ -307,6 +307,7 @@ document.getElementById("bal").textContent=Number(u.balance||0).toFixed(2);
 document.getElementById("team-size").textContent=(u.team&&u.team.length)||u.teamSize||0;
 document.getElementById("ref-bonus").textContent=Number(u.refBonus||0).toFixed(2);
 document.getElementById("ref-code").textContent=u.refCode;
+  const rl=document.getElementById("ref-link");if(rl)rl.textContent=refLink();
 const pf=Number(u.profit||0).toFixed(2);
 const a=document.getElementById("profit-home");if(a)a.textContent=pf;
 const b=document.getElementById("profit-total");if(b)b.textContent=pf;
@@ -320,6 +321,8 @@ const wh=document.getElementById("wd-hist");if(wh){const mine=wds().filter(w=>w.
 function openTab(id){["home","plans","deposit","trade","profit","withdraw","team"].forEach(t=>document.getElementById("tab-"+t).classList.toggle("hidden",t!==id));document.querySelectorAll(".tab-btn").forEach(b=>{b.classList.toggle("gold-border",b.dataset.tab===id);b.classList.toggle("text-nx-gold",b.dataset.tab===id);});}
 function copyAddr(){navigator.clipboard.writeText(ADDR).then(()=>{document.getElementById("copy-msg").classList.remove("hidden");setTimeout(()=>document.getElementById("copy-msg").classList.add("hidden"),1500);});}
 function copyRef(){const u=currentUser();if(u)navigator.clipboard.writeText(u.refCode);}
+  function refLink(){const u=currentUser();return u?location.origin+"/?ref="+encodeURIComponent(u.refCode):location.origin+"/";}
+function copyRefLink(){navigator.clipboard.writeText(refLink());pop("Copied","Referral link copy ho gayi");}
 function submitHash(){const u=currentUser(),amt=Number(document.getElementById("dep-amt").value),hash=document.getElementById("dep-hash").value.trim();if(!amt||amt<20){alert("Min $20");return;}if(hash.length<10){alert("Hash");return;}const plan=planFor(amt);u.balance=Number(u.balance||0)+amt;u.deposits=u.deposits||[];u.deposits.unshift({amount:amt,hash,time:new Date().toLocaleString(),label:plan.label,hours:plan.hours,start:Date.now(),end:Date.now()+plan.hours*3600*1000,paid:false});persistUser(u);refreshDash();document.getElementById("dep-amt").value="";document.getElementById("dep-hash").value="";pop("Deposit OK","$"+amt+" in wallet");}
 function saveAddr(){const u=currentUser(),a=document.getElementById("wd-addr").value.trim();if(!a.startsWith("0x")||a.length<20){alert("0x address");return;}u.wdAddress=a;persistUser(u);refreshDash();pop("Saved","Address confirmed");}
 function calcFee(){const amt=Number(document.getElementById("wd-amt").value)||0;document.getElementById("wd-fee").textContent=(amt*0.05).toFixed(2);document.getElementById("wd-net").textContent=(amt*0.95).toFixed(2);}
@@ -339,7 +342,7 @@ const mk=document.getElementById("mark-px");if(mk)mk.textContent=fmt(px-0.8);
 const ls=document.getElementById("last-px");if(ls)ls.textContent=pt;
 drawOHLC(document.getElementById("hero-chart"));drawOHLC(document.getElementById("dash-chart"));drawOHLC(document.getElementById("trade-chart"));tickBook();if(Math.random()>.4)tickTape();
 }
-window.addEventListener("load",()=>{seedCandles();tickMarket();setInterval(tickMarket,900);const s=sess();if(s&&s.admin){document.getElementById("auth-wrap").classList.add("hidden");document.getElementById("admin-wrap").classList.remove("hidden");renderAdmin();}else if(s&&currentUser())enterDash();else if(location.hash==="#admin")showScreen("adminlogin");else showScreen("landing");});
+window.addEventListener("load",()=>const q=new URLSearchParams(location.search).get("ref");if(q){const box=document.getElementById("su-ref");if(box)box.value=q;}{seedCandles();tickMarket();setInterval(tickMarket,900);const s=sess();if(s&&s.admin){document.getElementById("auth-wrap").classList.add("hidden");document.getElementById("admin-wrap").classList.remove("hidden");renderAdmin();}else if(s&&currentUser())enterDash();else if(location.hash==="#admin")showScreen("adminlogin");else showScreen("landing");});
 window.addEventListener("hashchange",()=>{if(location.hash==="#admin"){document.getElementById("dash-wrap").classList.add("hidden");document.getElementById("admin-wrap").classList.add("hidden");document.getElementById("auth-wrap").classList.remove("hidden");showScreen("adminlogin");}});
 </script>
 </body>
