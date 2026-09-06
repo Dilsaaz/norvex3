@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>NORVEX TRADE</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -19,9 +19,9 @@ body{font-family:Inter,system-ui,sans-serif;background:#07140e;color:#f5edd0}
 .tape-row,.ob-row{display:flex;justify-content:space-between;font-variant-numeric:tabular-nums;padding:2px 0;font-size:11px}
 .tape-row{border-bottom:1px solid rgba(42,90,58,.35)}
 input,select{background:#0a1c12;border:1px solid #2a5a3a;color:#f5edd0}
-input:focus,select:focus{outline:none;border-color:#d4af37}
-.logo-n{border-radius:9999px;background:#0d3a24;border:2px solid #d4af37;display:flex;align-items:center;justify-content:center;box-shadow:0 0 12px rgba(212,175,55,.25);flex-shrink:0}
-.logo-n:after{content:"N";font-family:Cinzel,serif;font-weight:700;color:#d4af37;font-size:70%;line-height:1}
+.logo-n{border-radius:9999px;background:#0d3a24;border:2px solid #d4af37;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.logo-n:after{content:"N";font-family:Cinzel,serif;font-weight:700;color:#d4af37;font-size:70%}
+a[href*="netlify.com"]{display:none!important}
 </style>
 </head>
 <body class="min-h-screen">
@@ -29,25 +29,23 @@ input:focus,select:focus{outline:none;border-color:#d4af37}
 <header class="max-w-6xl mx-auto px-4 py-5 flex items-center justify-between">
 <div class="flex items-center gap-3"><div class="logo-n w-12 h-12"></div>
 <div><div class="serif text-2xl text-nx-gold tracking-widest">NORVEX</div><div class="text-[10px] tracking-[0.3em] text-nx-gold2">TRADE · EARN · GROW</div></div></div>
-<button onclick="showScreen('login')" class="text-sm gold-border px-4 py-2 rounded-full text-nx-gold">Login</button>
+<button type="button" onclick="showScreen('login')" class="text-sm gold-border px-4 py-2 rounded-full text-nx-gold">Login</button>
 </header>
 <section id="screen-landing" class="max-w-6xl mx-auto px-4 pb-16">
 <div class="grid md:grid-cols-2 gap-10 items-center pt-6">
 <div>
 <p class="text-nx-gold text-xs tracking-[0.25em] mb-3">GLOBAL CRYPTO TRADING PLATFORM</p>
 <h1 class="serif text-4xl text-nx-gold leading-tight">Norvex Trade.<br/>Real Profits.</h1>
-<p class="mt-4 text-sm text-amber-100/70">2X plans from $20 · BEP20 USDT · 5% withdraw fee</p>
 <div class="flex gap-3 mt-6">
-<button onclick="showScreen('signup')" class="bg-nx-gold text-nx-bg font-semibold px-6 py-3 rounded-full glow">Join Now</button>
-<button onclick="showScreen('login')" class="gold-border text-nx-gold px-6 py-3 rounded-full">Login</button>
+<button type="button" onclick="showScreen('signup')" class="bg-nx-gold text-nx-bg font-semibold px-6 py-3 rounded-full glow">Join Now</button>
+<button type="button" onclick="showScreen('login')" class="gold-border text-nx-gold px-6 py-3 rounded-full">Login</button>
 </div>
 </div>
 <div class="bg-nx-card gold-border rounded-2xl p-5 glow">
 <div class="flex justify-center mb-2"><div class="logo-n w-14 h-14"></div></div>
 <div class="flex justify-between text-xs mb-2"><span class="text-nx-gold">LIVE · BTC/USDT</span><span id="hero-btc" class="tick-up">$68,432</span></div>
 <div id="hero-chart" class="h-36 flex items-end bg-black/30 rounded-lg px-2 py-2"></div>
-</div>
-</div>
+</div></div>
 <h2 class="serif text-center text-nx-gold text-2xl mt-12 mb-6">Investment Plans</h2>
 <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
 <div class="bg-nx-card gold-border rounded-2xl p-5 text-center"><div class="serif text-3xl text-nx-gold">$20</div><div class="text-xs">24 HOURS · 2X</div></div>
@@ -60,46 +58,42 @@ input:focus,select:focus{outline:none;border-color:#d4af37}
 <div class="bg-nx-card gold-border rounded-2xl p-6 glow">
 <div class="flex justify-center mb-3"><div class="logo-n w-14 h-14"></div></div>
 <h2 class="serif text-2xl text-nx-gold text-center">Create Account</h2>
-<input id="su-user" class="w-full rounded-lg px-3 py-2 mb-3 mt-3" placeholder="Username" />
-<input id="su-email" type="email" class="w-full rounded-lg px-3 py-2 mb-3" placeholder="Email" />
-<input id="su-phone" class="w-full rounded-lg px-3 py-2 mb-3" placeholder="Phone" />
-<input id="su-ref" class="w-full rounded-lg px-3 py-2 mb-4" placeholder="Referral code NV-XXXX (optional)" />
-<button onclick="sendOtp()" class="w-full bg-nx-gold text-nx-bg font-semibold py-3 rounded-full">Send OTP</button>
-</div>
-</section>
+<input id="su-user" class="w-full rounded-lg px-3 py-2 mb-3 mt-3" placeholder="Username"/>
+<input id="su-email" type="email" class="w-full rounded-lg px-3 py-2 mb-3" placeholder="Email"/>
+<input id="su-phone" class="w-full rounded-lg px-3 py-2 mb-3" placeholder="Phone"/>
+<input id="su-ref" class="w-full rounded-lg px-3 py-2 mb-4" placeholder="Referral code NV-XXXX"/>
+<button type="button" onclick="sendOtp()" class="w-full bg-nx-gold text-nx-bg font-semibold py-3 rounded-full">Send OTP</button>
+</div></section>
 <section id="screen-otp" class="hidden max-w-md mx-auto px-4 py-10">
 <div class="bg-nx-card gold-border rounded-2xl p-6 glow">
 <h2 class="serif text-2xl text-nx-gold text-center">Verify OTP</h2>
 <p class="text-center text-xs mb-3">Sent to <span id="otp-email-label" class="text-nx-gold"></span></p>
 <p id="otp-status" class="text-center text-xs text-emerald-400 mb-3 hidden"></p>
-<input id="su-otp" maxlength="6" class="w-full rounded-lg px-3 py-3 mb-4 text-center tracking-[0.5em] text-xl" />
-<button onclick="verifyOtp()" class="w-full bg-nx-gold text-nx-bg font-semibold py-3 rounded-full">Verify</button>
-</div>
-</section>
+<input id="su-otp" maxlength="6" class="w-full rounded-lg px-3 py-3 mb-4 text-center tracking-[0.5em] text-xl"/>
+<button type="button" onclick="verifyOtp()" class="w-full bg-nx-gold text-nx-bg font-semibold py-3 rounded-full">Verify</button>
+</div></section>
 <section id="screen-login" class="hidden max-w-md mx-auto px-4 py-10">
 <div class="bg-nx-card gold-border rounded-2xl p-6 glow">
 <div class="flex justify-center mb-3"><div class="logo-n w-14 h-14"></div></div>
 <h2 class="serif text-2xl text-nx-gold text-center">Login</h2>
-<input id="li-email" type="email" class="w-full rounded-lg px-3 py-2 mb-3 mt-3" placeholder="Email" />
-<input id="li-pass" type="password" class="w-full rounded-lg px-3 py-2 mb-4" placeholder="OTP PIN" />
-<button onclick="doLogin()" class="w-full bg-nx-gold text-nx-bg font-semibold py-3 rounded-full">Login</button>
-</div>
-</section>
+<input id="li-email" type="email" class="w-full rounded-lg px-3 py-2 mb-3 mt-3" placeholder="Email"/>
+<input id="li-pass" type="password" class="w-full rounded-lg px-3 py-2 mb-4" placeholder="OTP PIN"/>
+<button type="button" onclick="doLogin()" class="w-full bg-nx-gold text-nx-bg font-semibold py-3 rounded-full">Login</button>
+</div></section>
 <section id="screen-adminlogin" class="hidden max-w-md mx-auto px-4 py-10">
 <div class="bg-nx-card gold-border rounded-2xl p-6 glow">
 <h2 class="serif text-2xl text-nx-gold text-center">Admin</h2>
-<input id="ad-id" class="w-full rounded-lg px-3 py-2 mb-3 mt-3" placeholder="Admin ID" />
-<input id="ad-pass" type="password" class="w-full rounded-lg px-3 py-2 mb-4" placeholder="Password" />
-<button onclick="adminLogin()" class="w-full bg-nx-gold text-nx-bg font-semibold py-3 rounded-full">Enter</button>
-</div>
-</section>
+<input id="ad-id" class="w-full rounded-lg px-3 py-2 mb-3 mt-3" placeholder="Admin ID"/>
+<input id="ad-pass" type="password" class="w-full rounded-lg px-3 py-2 mb-4" placeholder="Password"/>
+<button type="button" onclick="adminLogin()" class="w-full bg-nx-gold text-nx-bg font-semibold py-3 rounded-full">Enter</button>
+</div></section>
 <a href="#admin" class="fixed bottom-2 right-2 text-[9px] text-transparent">.</a>
 </div>
 
 <div id="admin-wrap" class="hidden min-h-screen">
 <header class="border-b border-nx-line px-4 py-3 flex justify-between items-center">
 <div class="flex items-center gap-2"><div class="logo-n w-9 h-9"></div><div class="serif text-nx-gold">NORVEX ADMIN</div></div>
-<button onclick="logout()" class="gold-border text-nx-gold px-3 py-1 rounded-full text-xs">Logout</button>
+<button type="button" onclick="logout()" class="gold-border text-nx-gold px-3 py-1 rounded-full text-xs">Logout</button>
 </header>
 <main class="max-w-6xl mx-auto p-4 space-y-4">
 <div class="grid sm:grid-cols-3 gap-3">
@@ -108,39 +102,32 @@ input:focus,select:focus{outline:none;border-color:#d4af37}
 <div class="bg-nx-card gold-border rounded-xl p-4"><div class="text-[11px] text-nx-gold2">WALLETS</div><div id="ad-wallets" class="serif text-2xl text-nx-gold">$0</div></div>
 </div>
 <div class="bg-nx-card gold-border rounded-xl p-4 grid sm:grid-cols-4 gap-2 text-xs">
-<input id="ad-email" placeholder="email" class="rounded-lg px-3 py-2" />
-<input id="ad-amt" type="number" placeholder="amount" class="rounded-lg px-3 py-2" />
+<input id="ad-email" placeholder="email" class="rounded-lg px-3 py-2"/>
+<input id="ad-amt" type="number" placeholder="amount" class="rounded-lg px-3 py-2"/>
 <select id="ad-action" class="rounded-lg px-3 py-2"><option value="set">Set</option><option value="add">Add</option></select>
-<button onclick="adminSetBal()" class="bg-nx-gold text-nx-bg rounded-full">Update</button>
+<button type="button" onclick="adminSetBal()" class="bg-nx-gold text-nx-bg rounded-full">Update</button>
 </div>
-<div class="overflow-x-auto bg-nx-card gold-border rounded-xl">
-<div class="p-3 text-nx-gold">Withdraws</div>
-<table class="w-full text-xs"><thead class="text-nx-gold2 border-y border-nx-line"><tr><th class="p-2 text-left">User</th><th>Amt</th><th>Fee</th><th>Net</th><th>Addr</th><th>Status</th><th>Action</th></tr></thead><tbody id="ad-wd-rows"></tbody></table>
-</div>
-<div class="overflow-x-auto bg-nx-card gold-border rounded-xl">
-<div class="p-3 text-nx-gold">Users</div>
-<table class="w-full text-xs"><thead class="text-nx-gold2 border-y border-nx-line"><tr><th class="p-2 text-left">User</th><th>Email</th><th>Phone</th><th>Bal</th><th>Team</th><th>Ref</th></tr></thead><tbody id="ad-user-rows"></tbody></table>
-</div>
-<div class="overflow-x-auto bg-nx-card gold-border rounded-xl">
-<div class="p-3 text-nx-gold">Deposits</div>
-<table class="w-full text-xs"><thead class="text-nx-gold2 border-y border-nx-line"><tr><th class="p-2 text-left">User</th><th>Amt</th><th>Hash</th><th>Time</th></tr></thead><tbody id="ad-dep-rows"></tbody></table>
-</div>
-</main>
-</div>
+<div class="overflow-x-auto bg-nx-card gold-border rounded-xl"><div class="p-3 text-nx-gold">Withdraws</div>
+<table class="w-full text-xs"><thead class="text-nx-gold2 border-y border-nx-line"><tr><th class="p-2 text-left">User</th><th>Amt</th><th>Fee</th><th>Net</th><th>Addr</th><th>Status</th><th>Action</th></tr></thead><tbody id="ad-wd-rows"></tbody></table></div>
+<div class="overflow-x-auto bg-nx-card gold-border rounded-xl"><div class="p-3 text-nx-gold">Users</div>
+<table class="w-full text-xs"><thead class="text-nx-gold2 border-y border-nx-line"><tr><th class="p-2 text-left">User</th><th>Email</th><th>Phone</th><th>Bal</th><th>Team</th><th>Ref</th></tr></thead><tbody id="ad-user-rows"></tbody></table></div>
+<div class="overflow-x-auto bg-nx-card gold-border rounded-xl"><div class="p-3 text-nx-gold">Deposits</div>
+<table class="w-full text-xs"><thead class="text-nx-gold2 border-y border-nx-line"><tr><th class="p-2 text-left">User</th><th>Amt</th><th>Hash</th><th>Time</th></tr></thead><tbody id="ad-dep-rows"></tbody></table></div>
+</main></div>
 
 <div id="dash-wrap" class="hidden min-h-screen">
 <header class="border-b border-nx-line px-4 py-3 flex justify-between items-center">
 <div class="flex items-center gap-2"><div class="logo-n w-9 h-9"></div><div class="serif text-nx-gold tracking-widest">NORVEX TRADE</div></div>
-<button onclick="logout()" class="gold-border text-nx-gold px-3 py-1 rounded-full text-xs">Logout</button>
+<button type="button" onclick="logout()" class="gold-border text-nx-gold px-3 py-1 rounded-full text-xs">Logout</button>
 </header>
 <nav class="flex overflow-x-auto gap-2 px-3 py-3 text-xs border-b border-nx-line">
-<button class="tab-btn gold-border px-3 py-1.5 rounded-full text-nx-gold" data-tab="home" onclick="openTab('home')">Home</button>
-<button class="tab-btn px-3 py-1.5 rounded-full" data-tab="plans" onclick="openTab('plans')">Plans</button>
-<button class="tab-btn px-3 py-1.5 rounded-full" data-tab="deposit" onclick="openTab('deposit')">Deposit</button>
-<button class="tab-btn px-3 py-1.5 rounded-full" data-tab="trade" onclick="openTab('trade')">Live</button>
-<button class="tab-btn px-3 py-1.5 rounded-full" data-tab="profit" onclick="openTab('profit')">Profit</button>
-<button class="tab-btn px-3 py-1.5 rounded-full" data-tab="withdraw" onclick="openTab('withdraw')">Withdraw</button>
-<button class="tab-btn px-3 py-1.5 rounded-full" data-tab="team" onclick="openTab('team')">Team</button>
+<button type="button" class="tab-btn gold-border px-3 py-1.5 rounded-full text-nx-gold" data-tab="home" onclick="openTab('home')">Home</button>
+<button type="button" class="tab-btn px-3 py-1.5 rounded-full" data-tab="plans" onclick="openTab('plans')">Plans</button>
+<button type="button" class="tab-btn px-3 py-1.5 rounded-full" data-tab="deposit" onclick="openTab('deposit')">Deposit</button>
+<button type="button" class="tab-btn px-3 py-1.5 rounded-full" data-tab="trade" onclick="openTab('trade')">Live</button>
+<button type="button" class="tab-btn px-3 py-1.5 rounded-full" data-tab="profit" onclick="openTab('profit')">Profit</button>
+<button type="button" class="tab-btn px-3 py-1.5 rounded-full" data-tab="withdraw" onclick="openTab('withdraw')">Withdraw</button>
+<button type="button" class="tab-btn px-3 py-1.5 rounded-full" data-tab="team" onclick="openTab('team')">Team</button>
 </nav>
 <main class="max-w-5xl mx-auto p-4 space-y-4">
 <section id="tab-home">
@@ -158,18 +145,17 @@ input:focus,select:focus{outline:none;border-color:#d4af37}
 <div class="bg-nx-card gold-border rounded-xl p-4"><b class="text-nx-gold">$50</b> · 72h · 2X $100</div>
 <div class="bg-nx-card gold-border rounded-xl p-4"><b class="text-nx-gold">$100</b> · 10d · 2X</div>
 <div class="bg-nx-card gold-border rounded-xl p-4"><b class="text-nx-gold">$100k</b> · 10d · 2X</div>
-</div>
-</section>
+</div></section>
 <section id="tab-deposit" class="hidden">
 <div class="bg-nx-card gold-border rounded-xl p-4">
 <div class="flex gap-2 bg-black/40 rounded-lg p-3">
 <code class="text-[11px] break-all flex-1">0x07CCDCFBB0fa8F84ea673512d5831F0B4a84989E</code>
-<button onclick="copyAddr()" class="gold-border text-nx-gold text-xs px-3 py-1 rounded-full">Copy</button>
+<button type="button" onclick="copyAddr()" class="gold-border text-nx-gold text-xs px-3 py-1 rounded-full">Copy</button>
 </div>
 <p id="copy-msg" class="text-xs text-emerald-400 mt-2 hidden">Copied</p>
-<input id="dep-amt" type="number" class="w-full rounded-lg px-3 py-2 mt-3" placeholder="Amount min 20" />
-<input id="dep-hash" class="w-full rounded-lg px-3 py-2 mt-3" placeholder="Tx hash" />
-<button onclick="submitHash()" class="w-full mt-4 bg-nx-gold text-nx-bg font-semibold py-3 rounded-full">Submit Hash</button>
+<input id="dep-amt" type="number" class="w-full rounded-lg px-3 py-2 mt-3" placeholder="Amount min 20"/>
+<input id="dep-hash" class="w-full rounded-lg px-3 py-2 mt-3" placeholder="Tx hash"/>
+<button type="button" onclick="submitHash()" class="w-full mt-4 bg-nx-gold text-nx-bg font-semibold py-3 rounded-full">Submit Hash</button>
 </div>
 <div class="bg-nx-card gold-border rounded-xl p-4 mt-3"><div id="dep-hist" class="text-xs">No deposits yet.</div></div>
 </section>
@@ -182,8 +168,7 @@ input:focus,select:focus{outline:none;border-color:#d4af37}
 <div class="grid md:grid-cols-2 gap-3 mt-3">
 <div class="bg-black/30 rounded-lg p-3"><div class="text-[10px] text-nx-gold mb-2">ORDER BOOK</div><div id="asks"></div><div id="spread" class="text-center text-xs text-nx-gold py-1"></div><div id="bids"></div></div>
 <div class="bg-black/30 rounded-lg p-3"><div class="text-[10px] text-nx-gold mb-2">TRADES</div><div id="tape"></div></div>
-</div>
-</div>
+</div></div>
 </section>
 <section id="tab-profit" class="hidden">
 <div class="bg-nx-card gold-border rounded-xl p-4 mb-3"><div class="serif text-3xl text-nx-gold">$<span id="profit-total">0.00</span></div><p class="text-xs mt-2 text-amber-100/50">$20 plan = 24h later wallet $0, profit $40</p></div>
@@ -192,21 +177,24 @@ input:focus,select:focus{outline:none;border-color:#d4af37}
 <section id="tab-withdraw" class="hidden">
 <div class="bg-nx-card gold-border rounded-xl p-4 mb-3">
 <p id="wd-saved" class="text-xs break-all">Not added</p>
-<input id="wd-addr" class="w-full rounded-lg px-3 py-2 mt-3" placeholder="0x your BEP20" />
-<button onclick="saveAddr()" class="w-full mt-3 gold-border text-nx-gold py-2 rounded-full">Confirm Address</button>
+<input id="wd-addr" class="w-full rounded-lg px-3 py-2 mt-3" placeholder="0x your BEP20"/>
+<button type="button" onclick="saveAddr()" class="w-full mt-3 gold-border text-nx-gold py-2 rounded-full">Confirm Address</button>
 </div>
 <div class="bg-nx-card gold-border rounded-xl p-4 mb-3">
-<p class="text-xs mb-2">Wallet + Profit se withdraw. Team bonus wallet mein aata hai. Fee 5%.</p>
-<input id="wd-amt" type="number" class="w-full rounded-lg px-3 py-2" oninput="calcFee()" placeholder="Amount" />
+<input id="wd-amt" type="number" class="w-full rounded-lg px-3 py-2" oninput="calcFee()" placeholder="Amount"/>
 <div class="text-xs mt-2">Fee 5% $<span id="wd-fee">0.00</span> · Net $<span id="wd-net" class="text-nx-gold">0.00</span></div>
-<button onclick="requestWd()" class="w-full mt-4 bg-nx-gold text-nx-bg font-semibold py-3 rounded-full">Request Withdraw</button>
+<button type="button" onclick="requestWd()" class="w-full mt-4 bg-nx-gold text-nx-bg font-semibold py-3 rounded-full">Request Withdraw</button>
 </div>
 <div class="bg-nx-card gold-border rounded-xl p-4"><div id="wd-hist" class="text-xs">No requests.</div></div>
 </section>
 <section id="tab-team" class="hidden">
-<div class="bg-nx-card gold-border rounded-xl p-4 mb-3"><b id="ref-code" class="text-nx-gold">NV-USER</b>
-<button onclick="copyRef()" class="text-[10px] gold-border px-2 py-0.5 rounded-full text-nx-gold">Copy</button>
-<div class="text-xs mt-2">Direct bonus 5% · 5 refs = $20 wallet</div></div>
+<div class="bg-nx-card gold-border rounded-xl p-4 mb-3">
+<b id="ref-code" class="text-nx-gold">NV-USER</b>
+<button type="button" onclick="copyRef()" class="text-[10px] gold-border px-2 py-0.5 rounded-full text-nx-gold">Copy Code</button>
+<div id="ref-link" class="text-[10px] break-all mt-2 text-amber-100/70"></div>
+<button type="button" onclick="copyRefLink()" class="text-[10px] gold-border px-2 py-1 rounded-full text-nx-gold mt-2">Copy Link</button>
+<div class="text-xs mt-2">5 refs = $20 wallet</div>
+</div>
 <div class="overflow-x-auto bg-nx-card gold-border rounded-xl">
 <table class="w-full text-xs">
 <thead class="text-nx-gold border-b border-nx-line"><tr><th class="p-3 text-left">Refs</th><th class="p-3">Bonus</th><th class="p-3">Level</th></tr></thead>
@@ -217,25 +205,17 @@ input:focus,select:focus{outline:none;border-color:#d4af37}
 <tr class="border-b border-nx-line/50"><td class="p-3">100</td><td class="p-3 text-center">$250</td><td class="p-3 text-center">25</td></tr>
 <tr class="border-b border-nx-line/50"><td class="p-3">500</td><td class="p-3 text-center">$450</td><td class="p-3 text-center">37</td></tr>
 <tr><td class="p-3">1000</td><td class="p-3 text-center">$800</td><td class="p-3 text-center">50</td></tr>
-</tbody>
-</table>
-</div>
-<div class="bg-nx-card gold-border rounded-xl p-4 mt-3">
-<div class="text-xs text-nx-gold mb-2">TEAM MEMBERS</div>
-<div id="team-list" class="text-xs">No members yet. Share your code.</div>
-</div>
+</tbody></table></div>
+<div class="bg-nx-card gold-border rounded-xl p-4 mt-3"><div class="text-xs text-nx-gold mb-2">TEAM MEMBERS</div><div id="team-list" class="text-xs">No members yet.</div></div>
 </section>
-</main>
-</div>
+</main></div>
 
 <div id="popup" class="hidden fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4">
 <div class="bg-nx-card gold-border rounded-2xl p-6 max-w-sm w-full text-center glow">
-<div class="flex justify-center mb-2"><div class="logo-n w-12 h-12"></div></div>
 <h3 class="serif text-nx-gold text-xl" id="pop-title">OK</h3>
-<p class="text-sm text-amber-100/70 mt-2" id="pop-msg"></p>
-<button onclick="closePop()" class="mt-5 bg-nx-gold text-nx-bg font-semibold px-6 py-2 rounded-full">OK</button>
-</div>
-</div>
+<p class="text-sm mt-2" id="pop-msg"></p>
+<button type="button" onclick="closePop()" class="mt-5 bg-nx-gold text-nx-bg font-semibold px-6 py-2 rounded-full">OK</button>
+</div></div>
 
 <script>
 const ADDR="0x07CCDCFBB0fa8F84ea673512d5831F0B4a84989E";
@@ -245,18 +225,19 @@ const EMAILJS_PUBLIC="7QnOOVY77lTYJ_jzS",EMAILJS_SERVICE="service_cilo9di",EMAIL
 if(window.emailjs) emailjs.init({publicKey:EMAILJS_PUBLIC});
 const REF_TIERS=[{n:5,bonus:20},{n:15,bonus:80},{n:40,bonus:150},{n:100,bonus:250},{n:500,bonus:450},{n:1000,bonus:800}];
 let pending=null,candles=[],px=68432.21,openPx=66810.40,tape=[];
-function users(){return JSON.parse(localStorage.getItem(KEY_USERS)||"{}");}
+function users(){try{return JSON.parse(localStorage.getItem(KEY_USERS)||"{}");}catch(e){return{};}}
 function saveUsers(u){localStorage.setItem(KEY_USERS,JSON.stringify(u));}
-function wds(){return JSON.parse(localStorage.getItem(KEY_WD)||"[]");}
+function wds(){try{return JSON.parse(localStorage.getItem(KEY_WD)||"[]");}catch(e){return[];}}
 function saveWds(a){localStorage.setItem(KEY_WD,JSON.stringify(a));}
-function sess(){return JSON.parse(localStorage.getItem(KEY_SESS)||"null");}
+function sess(){try{return JSON.parse(localStorage.getItem(KEY_SESS)||"null");}catch(e){return null;}}
 function setSess(s){localStorage.setItem(KEY_SESS,JSON.stringify(s));}
 function showScreen(n){["landing","signup","otp","login","adminlogin"].forEach(x=>{const e=document.getElementById("screen-"+x);if(e)e.classList.toggle("hidden",x!==n);});}
 async function sendOtp(){
 const username=document.getElementById("su-user").value.trim();
 const email=document.getElementById("su-email").value.trim().toLowerCase();
 const phone=document.getElementById("su-phone").value.trim();
-const refIn=(document.getElementById("su-ref").value||"").trim().toUpperCase();
+const refEl=document.getElementById("su-ref");
+const refIn=refEl?(refEl.value||"").trim().toUpperCase():"";
 if(!username||!email||!phone){alert("Fill all");return;}
 const otp=String(Math.floor(100000+Math.random()*900000));
 pending={username,email,phone,otp,refIn};
@@ -265,12 +246,14 @@ try{await emailjs.send(EMAILJS_SERVICE,EMAILJS_TEMPLATE,{to_email:email,otp_code
 document.getElementById("otp-status").textContent="OTP sent";document.getElementById("otp-status").classList.remove("hidden");showScreen("otp");}
 catch(e){pending=null;alert("OTP failed");}
 }
-function applyRefTiers(u){u.claimedTiers=u.claimedTiers||[];const size=(u.team&&u.team.length)||0;REF_TIERS.forEach(t=>{if(size>=t.n&&!u.claimedTiers.includes(t.n)){u.balance=Number(u.balance||0)+t.bonus;u.refBonus=Number(u.refBonus||0)+t.bonus;u.claimedTiers.push(t.n);}});}
+function applyRefTiers(u){u.claimedTiers=u.claimedTiers||[];const size=(u.team&&u.team.length)||0;REF_TIERS.forEach(t=>{if(size>=t.n&&u.claimedTiers.indexOf(t.n)<0){u.balance=Number(u.balance||0)+t.bonus;u.refBonus=Number(u.refBonus||0)+t.bonus;u.claimedTiers.push(t.n);}});}
 function attachReferral(all,newEmail,p){
 const code=(p.refIn||"").trim().toUpperCase();if(!code)return;
-const sp=Object.values(all).find(x=>(x.refCode||"").toUpperCase()===code);
+const keys=Object.keys(all);let sp=null;
+for(let i=0;i<keys.length;i++){const x=all[keys[i]];if((x.refCode||"").toUpperCase()===code){sp=x;break;}}
 if(!sp||sp.email===newEmail)return;
-sp.team=sp.team||[];if(sp.team.some(m=>m.email===newEmail))return;
+sp.team=sp.team||[];
+for(let i=0;i<sp.team.length;i++){if(sp.team[i].email===newEmail)return;}
 sp.team.push({username:p.username,email:newEmail,phone:p.phone,time:new Date().toLocaleString()});
 sp.teamSize=sp.team.length;applyRefTiers(sp);all[sp.email]=sp;
 }
@@ -287,63 +270,72 @@ function adminLogin(){if(document.getElementById("ad-id").value.trim()!==ADMIN_I
 function renderAdmin(){
 const list=Object.values(users());document.getElementById("ad-users").textContent=list.length;
 let dep=0,wal=0,depRows="";
-list.forEach(u=>{wal+=Number(u.balance||0);(u.deposits||[]).forEach(d=>{dep+=Number(d.amount||0);depRows+=`<tr class="border-b border-nx-line/40"><td class="p-2">${u.username}</td><td class="p-2">$${d.amount}</td><td class="p-2 break-all">${d.hash}</td><td class="p-2">${d.time}</td></tr>`;});});
+list.forEach(function(u){wal+=Number(u.balance||0);(u.deposits||[]).forEach(function(d){dep+=Number(d.amount||0);depRows+='<tr class="border-b border-nx-line/40"><td class="p-2">'+u.username+'</td><td class="p-2">$'+d.amount+'</td><td class="p-2 break-all">'+d.hash+'</td><td class="p-2">'+d.time+'</td></tr>';});});
 document.getElementById("ad-deps").textContent="$"+dep.toFixed(2);document.getElementById("ad-wallets").textContent="$"+wal.toFixed(2);
-document.getElementById("ad-user-rows").innerHTML=list.map(u=>`<tr class="border-b border-nx-line/40"><td class="p-2">${u.username}</td><td class="p-2">${u.email}</td><td class="p-2">${u.phone||""}</td><td class="p-2">$${Number(u.balance||0).toFixed(2)}</td><td class="p-2">${(u.team&&u.team.length)||u.teamSize||0}</td><td class="p-2">${u.refCode||""}</td></tr>`).join("")||`<tr><td class="p-3" colspan="6">No users</td></tr>`;
-document.getElementById("ad-dep-rows").innerHTML=depRows||`<tr><td class="p-3" colspan="4">No deposits</td></tr>`;
-document.getElementById("ad-wd-rows").innerHTML=wds().map((w,i)=>`<tr class="border-b border-nx-line/40"><td class="p-2">${w.user}<br/>${w.email}</td><td class="p-2">$${w.amount}</td><td class="p-2">$${w.fee}</td><td class="p-2">$${w.net}</td><td class="p-2 break-all">${w.address}</td><td class="p-2">${w.status}</td><td class="p-2">${w.status==="PENDING"?`<button onclick="adminWd(${i},'APPROVED')" class="text-emerald-400">OK</button> <button onclick="adminWd(${i},'REJECTED')" class="text-red-400">X</button>`:"—"}</td></tr>`).join("")||`<tr><td class="p-3" colspan="7">None</td></tr>`;
+document.getElementById("ad-user-rows").innerHTML=list.map(function(u){return '<tr class="border-b border-nx-line/40"><td class="p-2">'+u.username+'</td><td class="p-2">'+u.email+'</td><td class="p-2">'+(u.phone||"")+'</td><td class="p-2">$'+Number(u.balance||0).toFixed(2)+'</td><td class="p-2">'+((u.team&&u.team.length)||u.teamSize||0)+'</td><td class="p-2">'+(u.refCode||"")+'</td></tr>';}).join("")||'<tr><td class="p-3" colspan="6">No users</td></tr>';
+document.getElementById("ad-dep-rows").innerHTML=depRows||'<tr><td class="p-3" colspan="4">No deposits</td></tr>';
+document.getElementById("ad-wd-rows").innerHTML=wds().map(function(w,i){return '<tr class="border-b border-nx-line/40"><td class="p-2">'+w.user+'<br/>'+w.email+'</td><td class="p-2">$'+w.amount+'</td><td class="p-2">$'+w.fee+'</td><td class="p-2">$'+w.net+'</td><td class="p-2 break-all">'+w.address+'</td><td class="p-2">'+w.status+'</td><td class="p-2">'+(w.status==="PENDING"?'<button type="button" onclick="adminWd('+i+',\'APPROVED\')" class="text-emerald-400">OK</button> <button type="button" onclick="adminWd('+i+',\'REJECTED\')" class="text-red-400">X</button>':"—")+'</td></tr>';}).join("")||'<tr><td class="p-3" colspan="7">None</td></tr>';
 }
 function adminWd(i,status){const all=wds();const w=all[i];if(!w||w.status!=="PENDING")return;const us=users();const u=us[w.email];if(status==="REJECTED"&&u){u.balance=Number(u.balance||0)+Number(w.amount);us[w.email]=u;saveUsers(us);}w.status=status;saveWds(all);renderAdmin();}
 function adminSetBal(){const email=document.getElementById("ad-email").value.trim().toLowerCase();const amt=Number(document.getElementById("ad-amt").value);const all=users();if(!all[email]){alert("Not found");return;}if(document.getElementById("ad-action").value==="set")all[email].balance=amt;else all[email].balance=Number(all[email].balance||0)+amt;saveUsers(all);renderAdmin();}
 function currentUser(){const s=sess();return s&&s.email?users()[s.email]||null:null;}
 function persistUser(u){const all=users();all[u.email]=u;saveUsers(all);}
-function enterDash(){const u=currentUser();if(!u){logout();return;}document.getElementById("auth-wrap").classList.add("hidden");document.getElementById("dash-wrap").classList.remove("hidden");refreshDash();openTab("home");if(window._t)clearInterval(window._t);window._t=setInterval(()=>{if(currentUser())refreshDash();},1000);}
+function enterDash(){const u=currentUser();if(!u){logout();return;}document.getElementById("auth-wrap").classList.add("hidden");document.getElementById("dash-wrap").classList.remove("hidden");refreshDash();openTab("home");if(window._t)clearInterval(window._t);window._t=setInterval(function(){if(currentUser())refreshDash();},1000);}
 function planFor(amt){if(amt>=100)return{label:"10 Days",hours:240};if(amt>=50)return{label:"72 Hours",hours:72};return{label:"24 Hours",hours:24};}
-function fmtLeft(ms){if(ms<=0)return"00:00:00";const s=Math.floor(ms/1000),d=Math.floor(s/86400),h=Math.floor((s%86400)/3600),m=Math.floor((s%3600)/60),sec=s%60,p=n=>String(n).padStart(2,"0");return(d?d+"d ":"")+p(h)+":"+p(m)+":"+p(sec);}
-function checkMature(u){if(!u||!u.deposits)return;let ch=false;u.deposits.forEach(d=>{if(!d.paid&&d.end&&Date.now()>=d.end){const inv=Number(d.amount)||0;u.balance=Math.max(0,Number(u.balance||0)-inv);u.profit=Number(u.profit||0)+inv*2;d.paid=true;ch=true;}});if(ch)persistUser(u);}
+function fmtLeft(ms){if(ms<=0)return"00:00:00";const s=Math.floor(ms/1000),d=Math.floor(s/86400),h=Math.floor((s%86400)/3600),m=Math.floor((s%3600)/60),sec=s%60,p=function(n){return String(n).padStart(2,"0");};return(d?d+"d ":"")+p(h)+":"+p(m)+":"+p(sec);}
+function checkMature(u){if(!u||!u.deposits)return;let ch=false;u.deposits.forEach(function(d){if(!d.paid&&d.end&&Date.now()>=d.end){const inv=Number(d.amount)||0;u.balance=Math.max(0,Number(u.balance||0)-inv);u.profit=Number(u.profit||0)+inv*2;d.paid=true;ch=true;}});if(ch)persistUser(u);}
+function refLink(){const u=currentUser();return u?(location.origin+"/?ref="+encodeURIComponent(u.refCode)):location.origin+"/";}
+function copyRefLink(){navigator.clipboard.writeText(refLink());pop("Copied","Referral link copy ho gayi");}
 function refreshDash(){
 const u=currentUser();if(!u)return;checkMature(u);
 document.getElementById("bal").textContent=Number(u.balance||0).toFixed(2);
 document.getElementById("team-size").textContent=(u.team&&u.team.length)||u.teamSize||0;
 document.getElementById("ref-bonus").textContent=Number(u.refBonus||0).toFixed(2);
 document.getElementById("ref-code").textContent=u.refCode;
-  const rl=document.getElementById("ref-link");if(rl)rl.textContent=refLink();
+const rl=document.getElementById("ref-link");if(rl)rl.textContent=refLink();
 const pf=Number(u.profit||0).toFixed(2);
 const a=document.getElementById("profit-home");if(a)a.textContent=pf;
 const b=document.getElementById("profit-total");if(b)b.textContent=pf;
 const pl=document.getElementById("profit-list");
-if(pl)pl.innerHTML=(u.deposits&&u.deposits.length)?u.deposits.map(d=>{const left=(d.end||0)-Date.now();const st=d.paid?"DONE 2X":(left<=0?"READY":fmtLeft(left));return `<div class="py-2">$${d.amount} → $${d.amount*2} · ${st}</div>`;}).join(""):"No plan";
-const h=document.getElementById("dep-hist");if(h)h.innerHTML=(u.deposits&&u.deposits.length)?u.deposits.map(d=>`<div>$${d.amount} · ${d.time}</div>`).join(""):"No deposits yet.";
-const tl=document.getElementById("team-list");if(tl){const mem=u.team||[];tl.innerHTML=mem.length?mem.map((m,i)=>`<div class="py-2 border-b border-nx-line/40">${i+1}. ${m.username} · ${m.email} · ${m.phone||""}</div>`).join(""):"No members yet. Share your code.";}
+if(pl)pl.innerHTML=(u.deposits&&u.deposits.length)?u.deposits.map(function(d){const left=(d.end||0)-Date.now();const st=d.paid?"DONE 2X":(left<=0?"READY":fmtLeft(left));return '<div class="py-2">$'+d.amount+' → $'+(d.amount*2)+' · '+st+"</div>";}).join(""):"No plan";
+const h=document.getElementById("dep-hist");if(h)h.innerHTML=(u.deposits&&u.deposits.length)?u.deposits.map(function(d){return "<div>$"+d.amount+" · "+d.time+"</div>";}).join(""):"No deposits yet.";
+const tl=document.getElementById("team-list");if(tl){const mem=u.team||[];tl.innerHTML=mem.length?mem.map(function(m,i){return '<div class="py-2 border-b border-nx-line/40">'+(i+1)+". "+m.username+" · "+m.email+" · "+(m.phone||"")+"</div>";}).join(""):"No members yet.";}
 const s=document.getElementById("wd-saved");if(s)s.textContent=u.wdAddress||"Not added";
-const wh=document.getElementById("wd-hist");if(wh){const mine=wds().filter(w=>w.email===u.email);wh.innerHTML=mine.length?mine.map(w=>`<div>$${w.amount} net $${w.net} · ${w.status}</div>`).join(""):"No requests.";}
+const wh=document.getElementById("wd-hist");if(wh){const mine=wds().filter(function(w){return w.email===u.email;});wh.innerHTML=mine.length?mine.map(function(w){return "<div>$"+w.amount+" net $"+w.net+" · "+w.status+"</div>";}).join(""):"No requests.";}
 }
-function openTab(id){["home","plans","deposit","trade","profit","withdraw","team"].forEach(t=>document.getElementById("tab-"+t).classList.toggle("hidden",t!==id));document.querySelectorAll(".tab-btn").forEach(b=>{b.classList.toggle("gold-border",b.dataset.tab===id);b.classList.toggle("text-nx-gold",b.dataset.tab===id);});}
-function copyAddr(){navigator.clipboard.writeText(ADDR).then(()=>{document.getElementById("copy-msg").classList.remove("hidden");setTimeout(()=>document.getElementById("copy-msg").classList.add("hidden"),1500);});}
+function openTab(id){["home","plans","deposit","trade","profit","withdraw","team"].forEach(function(t){document.getElementById("tab-"+t).classList.toggle("hidden",t!==id);});document.querySelectorAll(".tab-btn").forEach(function(btn){btn.classList.toggle("gold-border",btn.getAttribute("data-tab")===id);btn.classList.toggle("text-nx-gold",btn.getAttribute("data-tab")===id);});}
+function copyAddr(){navigator.clipboard.writeText(ADDR).then(function(){document.getElementById("copy-msg").classList.remove("hidden");setTimeout(function(){document.getElementById("copy-msg").classList.add("hidden");},1500);});}
 function copyRef(){const u=currentUser();if(u)navigator.clipboard.writeText(u.refCode);}
-  function refLink(){const u=currentUser();return u?location.origin+"/?ref="+encodeURIComponent(u.refCode):location.origin+"/";}
-function copyRefLink(){navigator.clipboard.writeText(refLink());pop("Copied","Referral link copy ho gayi");}
-function submitHash(){const u=currentUser(),amt=Number(document.getElementById("dep-amt").value),hash=document.getElementById("dep-hash").value.trim();if(!amt||amt<20){alert("Min $20");return;}if(hash.length<10){alert("Hash");return;}const plan=planFor(amt);u.balance=Number(u.balance||0)+amt;u.deposits=u.deposits||[];u.deposits.unshift({amount:amt,hash,time:new Date().toLocaleString(),label:plan.label,hours:plan.hours,start:Date.now(),end:Date.now()+plan.hours*3600*1000,paid:false});persistUser(u);refreshDash();document.getElementById("dep-amt").value="";document.getElementById("dep-hash").value="";pop("Deposit OK","$"+amt+" in wallet");}
-function saveAddr(){const u=currentUser(),a=document.getElementById("wd-addr").value.trim();if(!a.startsWith("0x")||a.length<20){alert("0x address");return;}u.wdAddress=a;persistUser(u);refreshDash();pop("Saved","Address confirmed");}
+function submitHash(){const u=currentUser(),amt=Number(document.getElementById("dep-amt").value),hash=document.getElementById("dep-hash").value.trim();if(!amt||amt<20){alert("Min $20");return;}if(hash.length<10){alert("Hash");return;}const plan=planFor(amt);u.balance=Number(u.balance||0)+amt;u.deposits=u.deposits||[];u.deposits.unshift({amount:amt,hash:hash,time:new Date().toLocaleString(),label:plan.label,hours:plan.hours,start:Date.now(),end:Date.now()+plan.hours*3600*1000,paid:false});persistUser(u);refreshDash();document.getElementById("dep-amt").value="";document.getElementById("dep-hash").value="";pop("Deposit OK","$"+amt+" in wallet");}
+function saveAddr(){const u=currentUser(),ad=document.getElementById("wd-addr").value.trim();if(ad.indexOf("0x")!==0||ad.length<20){alert("0x address");return;}u.wdAddress=ad;persistUser(u);refreshDash();pop("Saved","Address confirmed");}
 function calcFee(){const amt=Number(document.getElementById("wd-amt").value)||0;document.getElementById("wd-fee").textContent=(amt*0.05).toFixed(2);document.getElementById("wd-net").textContent=(amt*0.95).toFixed(2);}
-function requestWd(){const u=currentUser();if(!u.wdAddress){alert("Add address");return;}const amt=Number(document.getElementById("wd-amt").value);const avail=Number(u.balance||0)+Number(u.profit||0);if(!amt||amt>avail){alert("Wallet + Profit check");return;}const fee=+(amt*0.05).toFixed(2),net=+(amt*0.95).toFixed(2);let left=amt,w=Number(u.balance||0);if(w>=left){u.balance=w-left;}else{left-=w;u.balance=0;u.profit=Math.max(0,Number(u.profit||0)-left);}persistUser(u);const all=wds();all.unshift({user:u.username,email:u.email,amount:amt,fee,net,address:u.wdAddress,status:"PENDING",time:new Date().toLocaleString()});saveWds(all);document.getElementById("wd-amt").value="";calcFee();refreshDash();pop("Requested","Pending admin. Net $"+net);}
+function requestWd(){const u=currentUser();if(!u.wdAddress){alert("Add address");return;}const amt=Number(document.getElementById("wd-amt").value);const avail=Number(u.balance||0)+Number(u.profit||0);if(!amt||amt>avail){alert("Amount check");return;}const fee=+(amt*0.05).toFixed(2),net=+(amt*0.95).toFixed(2);let left=amt,w=Number(u.balance||0);if(w>=left){u.balance=w-left;}else{left-=w;u.balance=0;u.profit=Math.max(0,Number(u.profit||0)-left);}persistUser(u);const all=wds();all.unshift({user:u.username,email:u.email,amount:amt,fee:fee,net:net,address:u.wdAddress,status:"PENDING",time:new Date().toLocaleString()});saveWds(all);document.getElementById("wd-amt").value="";calcFee();refreshDash();pop("Requested","Pending admin. Net $"+net);}
 function pop(t,m){document.getElementById("pop-title").textContent=t;document.getElementById("pop-msg").textContent=m;document.getElementById("popup").classList.remove("hidden");}
 function closePop(){document.getElementById("popup").classList.add("hidden");}
-function seedCandles(){candles=[];let p=67200;for(let i=0;i<36;i++){const o=p,c=o+(Math.random()-.46)*90;candles.push({o,h:Math.max(o,c)+Math.random()*35,l:Math.min(o,c)-Math.random()*35,c});p=c;}px=candles[candles.length-1].c;}
-function drawOHLC(el){if(!el||!candles.length)return;el.innerHTML="";const hi=Math.max(...candles.map(k=>k.h)),lo=Math.min(...candles.map(k=>k.l)),span=hi-lo||1;candles.forEach(k=>{const col=document.createElement("div");col.className="candle-col";const color=k.c>=k.o?"#3ddc84":"#ff5d6c";const topPad=((hi-k.h)/span)*100,wickH=((k.h-k.l)/span)*100,bodyTop=((k.h-Math.max(k.o,k.c))/span)*100,bodyH=Math.max(2,(Math.abs(k.c-k.o)/span)*100);col.innerHTML=`<div style="height:${topPad}%"></div><div class="wick" style="height:${wickH}%;background:${color}"></div>`;const wrap=document.createElement("div");wrap.style.cssText="width:100%;display:flex;justify-content:center;margin-top:-"+wickH+"%;height:"+wickH+"%;position:relative;";const body=document.createElement("div");body.className="body";body.style.cssText=`position:absolute;top:${bodyTop/wickH*100}%;height:${Math.max(8,bodyH/wickH*100)}%;background:${color}`;wrap.appendChild(body);col.appendChild(wrap);el.appendChild(col);});}
+function seedCandles(){candles=[];let p=67200;for(let i=0;i<36;i++){const o=p,c=o+(Math.random()-0.46)*90;candles.push({o:o,h:Math.max(o,c)+Math.random()*35,l:Math.min(o,c)-Math.random()*35,c:c});p=c;}px=candles[candles.length-1].c;}
+function drawOHLC(el){if(!el||!candles.length)return;el.innerHTML="";const hi=Math.max.apply(null,candles.map(function(k){return k.h;}));const lo=Math.min.apply(null,candles.map(function(k){return k.l;}));const span=hi-lo||1;candles.forEach(function(k){const col=document.createElement("div");col.className="candle-col";const color=k.c>=k.o?"#3ddc84":"#ff5d6c";const topPad=((hi-k.h)/span)*100,wickH=((k.h-k.l)/span)*100,bodyTop=((k.h-Math.max(k.o,k.c))/span)*100,bodyH=Math.max(2,(Math.abs(k.c-k.o)/span)*100);col.innerHTML='<div style="height:'+topPad+'%"></div><div class="wick" style="height:'+wickH+"%;background:"+color+'"></div>';const wrap=document.createElement("div");wrap.style.cssText="width:100%;display:flex;justify-content:center;margin-top:-"+wickH+"%;height:"+wickH+"%;position:relative;";const body=document.createElement("div");body.className="body";body.style.cssText="position:absolute;top:"+(bodyTop/wickH*100)+"%;height:"+Math.max(8,bodyH/wickH*100)+"%;background:"+color;wrap.appendChild(body);col.appendChild(wrap);el.appendChild(col);});}
 function fmt(n){return Number(n).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});}
-function tickBook(){const a=document.getElementById("asks"),b=document.getElementById("bids");if(!a)return;let A="",B="";for(let i=5;i>=1;i--)A+=`<div class="ob-row" style="color:#ff5d6c"><span>${fmt(px+i)}</span><span>0.12</span></div>`;for(let i=1;i<=5;i++)B+=`<div class="ob-row" style="color:#3ddc84"><span>${fmt(px-i)}</span><span>0.12</span></div>`;a.innerHTML=A;b.innerHTML=B;}
-function tickTape(){const side=Math.random()>.5?"BUY":"SELL";tape.unshift({side,px:px.toFixed(2),size:"0.10"});if(tape.length>6)tape.pop();const el=document.getElementById("tape");if(el)el.innerHTML=tape.map(r=>`<div class="tape-row"><span style="color:${r.side==="BUY"?"#3ddc84":"#ff5d6c"}">${r.side}</span><span>${r.px}</span></div>`).join("");}
-function tickMarket(){if(!candles.length)seedCandles();const last=candles[candles.length-1];const c=Math.max(64000,Math.min(72000,last.c+(Math.random()-.49)*18));last.c=c;last.h=Math.max(last.h,c);last.l=Math.min(last.l,c);if(Math.random()>.7){candles.push({o:c,h:c+4,l:c-4,c});if(candles.length>36)candles.shift();}px=c;const up=px>=openPx,pt=fmt(px);
+function tickBook(){const a=document.getElementById("asks"),b=document.getElementById("bids");if(!a)return;let A="",B="";for(let i=5;i>=1;i--)A+='<div class="ob-row" style="color:#ff5d6c"><span>'+fmt(px+i)+'</span><span>0.12</span></div>';for(let i=1;i<=5;i++)B+='<div class="ob-row" style="color:#3ddc84"><span>'+fmt(px-i)+'</span><span>0.12</span></div>';a.innerHTML=A;b.innerHTML=B;}
+function tickTape(){const side=Math.random()>0.5?"BUY":"SELL";tape.unshift({side:side,px:px.toFixed(2)});if(tape.length>6)tape.pop();const el=document.getElementById("tape");if(el)el.innerHTML=tape.map(function(r){return '<div class="tape-row"><span style="color:'+(r.side==="BUY"?"#3ddc84":"#ff5d6c")+'">'+r.side+"</span><span>"+r.px+"</span></div>";}).join("");}
+function tickMarket(){if(!candles.length)seedCandles();const last=candles[candles.length-1];const c=Math.max(64000,Math.min(72000,last.c+(Math.random()-0.49)*18));last.c=c;last.h=Math.max(last.h,c);last.l=Math.min(last.l,c);if(Math.random()>0.7){candles.push({o:c,h:c+4,l:c-4,c:c});if(candles.length>36)candles.shift();}px=c;const up=px>=openPx,pt=fmt(px);
 const hero=document.getElementById("hero-btc");if(hero)hero.textContent="$"+pt;
 const lp=document.getElementById("live-pair");if(lp){lp.textContent="BTC/USDT $"+pt;lp.className=up?"tick-up":"tick-down";}
 const tp=document.getElementById("trade-price");if(tp){tp.textContent=pt;tp.className=(up?"tick-up":"tick-down")+" font-semibold text-2xl font-mono";}
 const mk=document.getElementById("mark-px");if(mk)mk.textContent=fmt(px-0.8);
 const ls=document.getElementById("last-px");if(ls)ls.textContent=pt;
-drawOHLC(document.getElementById("hero-chart"));drawOHLC(document.getElementById("dash-chart"));drawOHLC(document.getElementById("trade-chart"));tickBook();if(Math.random()>.4)tickTape();
+drawOHLC(document.getElementById("hero-chart"));drawOHLC(document.getElementById("dash-chart"));drawOHLC(document.getElementById("trade-chart"));tickBook();if(Math.random()>0.4)tickTape();
 }
-window.addEventListener("load",()=>const q=new URLSearchParams(location.search).get("ref");if(q){const box=document.getElementById("su-ref");if(box)box.value=q;}{seedCandles();tickMarket();setInterval(tickMarket,900);const s=sess();if(s&&s.admin){document.getElementById("auth-wrap").classList.add("hidden");document.getElementById("admin-wrap").classList.remove("hidden");renderAdmin();}else if(s&&currentUser())enterDash();else if(location.hash==="#admin")showScreen("adminlogin");else showScreen("landing");});
-window.addEventListener("hashchange",()=>{if(location.hash==="#admin"){document.getElementById("dash-wrap").classList.add("hidden");document.getElementById("admin-wrap").classList.add("hidden");document.getElementById("auth-wrap").classList.remove("hidden");showScreen("adminlogin");}});
+window.addEventListener("load",function(){
+const q=new URLSearchParams(location.search).get("ref");
+if(q){const box=document.getElementById("su-ref");if(box)box.value=q;}
+seedCandles();tickMarket();setInterval(tickMarket,900);
+const s=sess();
+if(s&&s.admin){document.getElementById("auth-wrap").classList.add("hidden");document.getElementById("admin-wrap").classList.remove("hidden");renderAdmin();}
+else if(s&&currentUser())enterDash();
+else if(location.hash==="#admin")showScreen("adminlogin");
+else showScreen("landing");
+});
+window.addEventListener("hashchange",function(){if(location.hash==="#admin"){document.getElementById("dash-wrap").classList.add("hidden");document.getElementById("admin-wrap").classList.add("hidden");document.getElementById("auth-wrap").classList.remove("hidden");showScreen("adminlogin");}});
 </script>
 </body>
 </html>
